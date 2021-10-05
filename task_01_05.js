@@ -47,11 +47,16 @@ function thinkNumber (num){
         }
         countNumbersArr.push(count);
     }
-    console.log(numberArr);
-    console.log(countNumbersArr);
+    let obj = {};
+    for (let i = 0; i < numberArr.length; i++){
+        obj[numberArr[i]] = countNumbersArr[i];
+    }
+    
+    return obj;
     
 }
-//thinkNumber(123559)
+
+//console.log(thinkNumber(123559));
 
 function thinkUnigueWords(str){
 
@@ -115,10 +120,11 @@ function thinkWords(str) {
         countUniqueWords.push(count);
     }
 
-    let baseWordsCount = [];
+    let baseWordsCount = {};
 
     for(let i = 0; i < uniqueWords.length; i++){
-        baseWordsCount.push(uniqueWords[i], countUniqueWords[i]);    
+
+        baseWordsCount[uniqueWords[i]] = countUniqueWords[i];    
 
     }
     return baseWordsCount;
@@ -126,28 +132,3 @@ function thinkWords(str) {
 }
 
 //console.log(thinkWords("dffd ddd ghgh dfdsf ddds fddgf ddd ddds ghgh"));
-
-function getFibonacci (num){
-
-    let first = 0;
-    let second = 1;
-    let fibonacci = [first, second];
-
-    if (num < 1) return 0;
-
-    if (num == 1){
-        return fibonacci;
-    }
-
-    for (let i = 1; i < num; i++){
-        let nextNumber = first + second;
-        fibonacci.push(nextNumber);
-        first = second;
-        second = nextNumber;
-    }
-    return fibonacci;
-
-}
-//console.log (getFibonacci(5))
-
-
