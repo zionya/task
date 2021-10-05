@@ -38,7 +38,7 @@ function thinkNumber (num){
     let numberArr = num.toString().split("");
     let countNumbersArr = [];
 
-    for (let i = 0; i < numberArr.length; i ++){
+    for (let i = 0; i < numberArr.length; i++){
         let count = 0;
         for(let j = 0; j < numberArr.length; j++){
             if(numberArr[i] == numberArr[j]){
@@ -47,16 +47,18 @@ function thinkNumber (num){
         }
         countNumbersArr.push(count);
     }
-    let obj = {};
+
+    let countedNumbers = {};
+
     for (let i = 0; i < numberArr.length; i++){
-        obj[numberArr[i]] = countNumbersArr[i];
+        countedNumbers[numberArr[i]] = countNumbersArr[i];
     }
     
-    return obj;
+    return countedNumbers;
     
 }
 
-//console.log(thinkNumber(123559));
+//console.log(thinkNumber(123559990));
 
 function thinkUnigueWords(str){
 
