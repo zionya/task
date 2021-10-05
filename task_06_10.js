@@ -9,7 +9,9 @@ function getFibonacci (num){
     if (num < 1) return 0;
 
     if (num == 1){
+
         return fibonacci;
+
     }
 
     for (let i = 1; i < num; i++){
@@ -18,6 +20,7 @@ function getFibonacci (num){
         first = second;
         second = nextNumber;
     }
+
     return fibonacci;
 
 }
@@ -77,15 +80,19 @@ function getFactorial(num){
     let factorial = 1;
 
     for(let i = 0; i < num; i++){
+
         factorial = factorial*(i + 1);
+
     }
 
     return factorial;
+
 }
 
 //console.log(getFactorial(2));
 
 function getSumMultipleOf2(arr){
+
     let sum = 0;
 
     for(let i = 0; i < arr.length; i++){
@@ -95,6 +102,7 @@ function getSumMultipleOf2(arr){
     }
 
     return sum;
+
 }
 
 //console.log (getSumMultipleOf2([-2, 4, 6, 7, 8, 9, 10, 12, 20, 21]));
@@ -104,7 +112,9 @@ function getSumMultipleOf3(arr){
     let sum = 0;
 
     for(let i = 0; i < arr.length; i++){
+
         if(arr[i]%3 === 0 ) sum += arr[i];
+
     }
 
     return sum;
@@ -123,6 +133,7 @@ function getSumPositive(arr){
     }
 
     return sum;
+
 }
 
 //console.log (getSumPositive([-2, 4, 6, -7, 8, -9, 10, 12, -20, 21]));
@@ -139,6 +150,7 @@ function getSumOdd(arr){
     }
 
     return sum;
+
 }
 
 //console.log (getSumOdd([-2, 4, 6, -7, 8, -9, 10, 12, -20, 21]));
@@ -202,7 +214,9 @@ function getCountedElemPrame(arr){
         let counter = 0;
 
         if (num < 2){
+
             return false;
+            
         }
 
         for (let i = 1; i < num; i++){
@@ -214,6 +228,7 @@ function getCountedElemPrame(arr){
         if(counter > 1) return false;
 
         return true;
+
     }
 
     for(let i = 0; i < arr.length; i++){
@@ -226,4 +241,4 @@ function getCountedElemPrame(arr){
 
 }
 
-console.log (getCountedElemPrame([2, 11, 0, 3, 0, 8, 0, 7, 0, -5, 21, 4]));
+//console.log (getCountedElemPrame([2, 11, 0, 3, 0, 8, 0, 7, 0, -5, 21, 4]));
