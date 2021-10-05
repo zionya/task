@@ -1,6 +1,6 @@
 "use strict"
 
-function isAnogram (firstStr, secondStr) {
+function isAnogramma (firstStr, secondStr) {
 
     let firstLettersArr = firstStr.toLowerCase().split("");
 
@@ -30,7 +30,7 @@ function isAnogram (firstStr, secondStr) {
 
 }
 
-console.log(isAnogram("asdaG", "gdass"));
+console.log(isAnogramma("asdaG", "gdass"));
 
 
 
