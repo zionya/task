@@ -2,6 +2,10 @@
 
 function getNumberBinarySys(num) {
 
+    if (typeof(num) !== 'number') {
+        return [];
+    }
+
     let binary = [];
     let numberDecimal = num;
 
@@ -22,6 +26,10 @@ function getNumberBinarySys(num) {
 //console.log(getNumberBinarySys(14));
 
 function getNumberDecimalSys(num) {
+
+    if (typeof(num) !== 'number' && typeof(num) !== 'string') {
+        return [];
+    }
 
     function pow(num, pow) {
 
@@ -51,9 +59,13 @@ function getNumberDecimalSys(num) {
   
 }
 
- // console.log(getNumberDecimalSys("1111"));
+ //console.log(getNumberDecimalSys("1111"));
 
- function getSumMultipleOf2DoubleArr(arr) {
+ function countSumMultipleOf2DoubleArr(arr) {
+
+    if (!Array.isArray(arr)) {
+        return [];
+    }
 
     let sum = 0;
 
@@ -73,10 +85,14 @@ function getNumberDecimalSys(num) {
 
 }
 
-//console.log (getSumMultipleOf2DoubleArr([[2, 4], [6, 7], [8, 9], [10, 12], [20, 21]]));
+//console.log (countSumMultipleOf2DoubleArr([[2, 4], [6, 7], [8, 9], [10, 12], [20, 21]]));
 
 
-function getSumMultipleOf3DoubleArr(arr) {
+function countSumMultipleOf3DoubleArr(arr) {
+
+    if (!Array.isArray(arr)) {
+        return [];
+    }
 
     let sum = 0;
 
@@ -95,10 +111,14 @@ function getSumMultipleOf3DoubleArr(arr) {
     return sum;
 }
 
-//console.log (getSumMultipleOf3DoubleArr([[2, 4], [6, 7], [8, 9], [10, 12], [20, 21]]));
+//console.log (countSumMultipleOf3DoubleArr([[2, 4], [6, 7], [8, 9], [10, 12], [20, 21]]));
 
-function getSumPositiveDoubleArr(arr) {
-    
+function countSumPositiveDoubleArr(arr) {
+  
+    if (!Array.isArray(arr)) {
+        return [];
+    }
+  
     let sum = 0;
 
     for (let i = 0; i < arr.length; i++) {
@@ -117,10 +137,14 @@ function getSumPositiveDoubleArr(arr) {
 
 }
 
-//console.log (getSumPositiveDoubleArr([[2, -4], [6, -7], [8, -9], [10, -12], [20, -21]]));
+//console.log (countSumPositiveDoubleArr([[2, -4], [6, -7], [8, -9], [10, -12], [20, -21]]));
 
 
-function getSumOddDoubleArr(arr) {
+function countSumOddDoubleArr(arr) {
+
+    if (!Array.isArray(arr)) {
+        return [];
+    }
     
     let sum = 0;
 
@@ -140,9 +164,13 @@ function getSumOddDoubleArr(arr) {
 
 }
 
-//console.log (getSumOddDoubleArr([[2, 4], [6, 7], [8, 9], [10, 12], [20, 21]]));
+//console.log (countSumOddDoubleArr([[2, 4], [6, 7], [8, 9], [10, 12], [20, 21]]));
 
-function countedZeroElemDoubleArr(arr) {
+function countZeroElemDoubleArr(arr) {
+
+    if (!Array.isArray(arr)) {
+        return [];
+    }
 
     let counter = 0;
 
@@ -162,10 +190,14 @@ function countedZeroElemDoubleArr(arr) {
 
 }
 
-//console.log (countedZeroElemDoubleArr([[2, 4], [0, 7], [8, 0], [10, 0], [20, 21]]));
+//console.log (countZeroElemDoubleArr([[2, 4], [0, 7], [8, 0], [10, 0], [20, 21]]));
 
 
-function countedNegativeElemDoubleArr(arr) {
+function countNegativeElemDoubleArr(arr) {
+
+    if (!Array.isArray(arr)) {
+        return [];
+    }
 
     let counter = 0;
 
@@ -185,9 +217,13 @@ function countedNegativeElemDoubleArr(arr) {
 
 }
 
-//console.log (countedNegativeElemDoubleArr([[2, -4], [0, -7], [8, 0], [10, 0], [-5, 21]]));
+//console.log (countNegativeElemDoubleArr([[2, -4], [0, -7], [8, 0], [10, 0], [-5, 21]]));
 
-function countedPositiveElemDoubleArr(arr) {
+function countPositiveElemDoubleArr(arr) {
+
+    if (!Array.isArray(arr)) {
+        return [];
+    }
 
     let counter = 0;
 
@@ -207,10 +243,14 @@ function countedPositiveElemDoubleArr(arr) {
 
 }
 
-//console.log (countedPositiveElemDoubleArr([[2, -4], [0, -7], [8, 0], [10, 0], [-5, 21]]));
+//console.log (countPositiveElemDoubleArr([[2, -4], [0, -7], [8, 0], [10, 0], [-5, 21]]));
 
 
-function countedPrameElemDoubleArr(arr) {
+function countPrameElemDoubleArr(arr) {
+
+    if (!Array.isArray(arr)) {
+        return [];
+    }
 
     let counter = 0;
 
@@ -254,9 +294,14 @@ function countedPrameElemDoubleArr(arr) {
 
 }
 
-//console.log (countedPrameElemDoubleArr([[2, -4], [0, 7], [8, 0], [10, 0], [5, 21]]));
+//console.log (countPrameElemDoubleArr([[2, -4], [0, 7], [8, 0], [10, 0], [5, 21]]));
 
-function countedSum(min, max) {
+function countSum(min, max) {
+
+    if (typeof(min) !== "number" || typeof(max) !== "number") {
+        return [];
+    }
+
     let sum = 0;
 
     for (let i = min; i <= max; i++) {
@@ -265,10 +310,15 @@ function countedSum(min, max) {
     return sum;
 }
 
-//console.log(countedSum(1, 5));
+//console.log(countSum(1, 5));
 
 
-function countedSumMultiplу3(min, max) {
+function countSumMultiplу3(min, max) {
+ 
+    if (typeof(min) !== "number" || typeof(max) !== "number") {
+        return [];
+    }
+
     let sum = 0;
 
     for (let i = min; i <= max; i++) {
@@ -282,9 +332,14 @@ function countedSumMultiplу3(min, max) {
     return sum;
 }
 
-//console.log(countedSumMultiplу3(1,9));
+//console.log(countSumMultiplу3(1, 9));
 
-function countedSumPositive(min, max) {
+function countSumPositive(min, max) {
+ 
+    if (typeof(min) !== "number" || typeof(max) !== "number") {
+        return [];
+    }
+
     let sum = 0;
 
     for (let i = min; i <= max; i++) {
@@ -298,10 +353,14 @@ function countedSumPositive(min, max) {
     return sum;
 }
 
-//console.log(countedSumPositive(-5, 5));
+//console.log(countSumPositive(-5, 5));
 
-function getAverage(arr) {
-
+function countAverage(arr) {
+    
+    if (!Array.isArray(arr)) {
+        return [];
+    }
+    
     let counter = 0;
     let sum = 0;
 
@@ -322,10 +381,14 @@ function getAverage(arr) {
 
 }
 
-//console.log( getAverage([1, 2, 3, 4, 5, 6, 7]));
+//console.log( countAverage([1, 2, 3, 4, 5, 6, 7]));
 
 
-function getAverageDoubleArr(arr) {
+function countAverageDoubleArr(arr) {
+
+    if (!Array.isArray(arr)) {
+        return [];
+    }
 
     let counter = 0;
     let sum = 0;
@@ -349,9 +412,13 @@ function getAverageDoubleArr(arr) {
 
 }
 
-//console.log( getAverageDoubleArr([[1, 2], [3, 4], [5, 6], [7, 5]]) );
+//console.log( countAverageDoubleArr([[1, 2], [3, 4], [5, 6], [7, 5]]) );
 
-function getAverageEven(arr) {
+function countAverageEven(arr) {
+
+    if (!Array.isArray(arr)) {
+        return [];
+    }
 
     let counter = 0;
     let sum = 0;
@@ -375,10 +442,14 @@ function getAverageEven(arr) {
 
 }
 
-//console.log( getAverageEven([1, 2, 3, 4, 5, 6, 7]));
+//console.log( countAverageEven([1, 2, 3, 4, 5, 6, 7]));
 
 
-function getAverageEvenDoubleArr(arr) {
+function countAverageEvenDoubleArr(arr) {
+
+    if (!Array.isArray(arr)) {
+        return [];
+    }
 
     let counter = 0;
     let sum = 0;
@@ -406,11 +477,15 @@ function getAverageEvenDoubleArr(arr) {
 
 }
 
-//console.log (getAverageEvenDoubleArr ([[1, 2], [3, 4], [5, 6], [8, 5]]));
+//console.log (countAverageEvenDoubleArr ([[1, 2], [3, 4], [5, 6], [8, 5]]));
 
 
 
-function getAverageOdd(arr) {
+function countAverageOdd(arr) {
+
+    if (!Array.isArray(arr)) {
+        return [];
+    }
 
     let counter = 0;
     let sum = 0;
@@ -434,10 +509,14 @@ function getAverageOdd(arr) {
 
 }
 
-///console.log( getAverageOdd([1, 2, 3, 4, 5, 1, 7]));
+//console.log( countAverageOdd([1, 2, 3, 4, 5, 1, 7]));
 
 
-function getAverageOddDoubleArr(arr) {
+function countAverageOddDoubleArr(arr) {
+
+    if (!Array.isArray(arr)) {
+        return [];
+    }
 
     let counter = 0;
     let sum = 0;
@@ -464,5 +543,5 @@ function getAverageOddDoubleArr(arr) {
 
 }
 
-//console.log (getAverageOddDoubleArr ([[1, 2], [3, 4], [5, 6], [8, 5]]));
+//console.log (countAverageOddDoubleArr ([[1, 2], [3, 4], [5, 6], [8, 5]]));
 

@@ -2,8 +2,11 @@
 
 function isAnogramma(firstWord, secondWord) {
 
-    let firstLettersArr = firstWord.toLowerCase().split("");
+    if (typeof(firstWord) !== "string" || typeof(firstWord) !== "string") {
+        return [];
+    }
 
+    let firstLettersArr = firstWord.toLowerCase().split("");
     let secondLettersArr = secondWord.toLowerCase().split("");
 
     if (firstLettersArr.length != secondLettersArr.length) {
@@ -44,7 +47,7 @@ function isAnogramma(firstWord, secondWord) {
 //console.log(isAnogramma("asdsG", "gdass"));
 
 
-function calculedAmountNumber(num) {
+function countAmountNumber(num) {
 
     //let numberArr = num.toString().split("");
     let numberArr = getSeparateNumber(num);
@@ -96,38 +99,64 @@ function calculedAmountNumber(num) {
     
 }
 
-//console.log(calculedAmountNumber(123559990));
+//console.log(countAmountNumber(123559990));
 
-function calculedUnigueWords(str) {
+function countUnigueWords(str) {
+
+    if (typeof(str) !== "string"){
+        return {};
+    }
+
+    function isUnigueWord(arr, index) {
+
+        for (let i = 0; i < arr.length; i++) {
+
+            if (arr[index] == arr[i]) {
+
+                if (index != i) {
+                    return false;
+                }
+
+            }
+        }
+        return true;
+    }
 
     let wordsArr = str.toLowerCase().split(" ");
     let uniqueWords = 0;
 
     for (let i = 0; i < wordsArr.length; i++) {
         
-        for (let j = 0; j < wordsArr.length; j++) {
-
-            if (wordsArr[i] == wordsArr[j]) {
-
-                if (i != j) {
-                    break;
-                }
-
-            }
-            if (j == (wordsArr.length - 1)) {
-
-                uniqueWords++;
-
-            }
+        if ( isUnigueWord(wordsArr, i) ) {
+            uniqueWords++;
         }
+                
     }
 
     return uniqueWords;
 }
 
-//console.log(calculedUnigueWords("dffd ddd ghgh dfdsf ddds fddgf ddd ddds ghgh"));
+//console.log(countUnigueWords("dffd ddd ghgh dfdsf nn ddds fddgf ddd nn ddds ghgh"));
 
-function calculedWords(str) {
+function countWords(str) {
+
+
+    if (typeof(str) !== "string"){
+        return {};
+    }
+
+    function isWordInArr(wordsArr, newArr, index) {
+
+        for (let i = 0; i < newArr.length; i++) {
+
+            if (wordsArr[index] == newArr[i]) {
+
+                    return false;
+
+            }
+        }
+        return true;
+    }
 
     let wordsArr = str.toLowerCase().split(" ");
     let uniqueWords = [];
@@ -141,21 +170,9 @@ function calculedWords(str) {
 
         } else {
 
-            for (let j = 0; j < uniqueWords.length; j++) {
-
-                if (wordsArr[i] == uniqueWords[j]) {
-
-                    break;
-
-                }
-
-                if (j == (uniqueWords.length - 1 )) {
-
-                    uniqueWords.push(wordsArr[i]);
-
-                }
-            
-            }    
+            if ( isWordInArr(wordsArr, uniqueWords, i) ) {
+                uniqueWords.push(wordsArr[i]);
+            }
 
         }
 
@@ -189,4 +206,4 @@ function calculedWords(str) {
     
 }
 
-//console.log(calculedWords("dffd ddd ghgh dfdsf ddds fddgf ddd ddds ghgh"));
+//console.log(countWords("dffd ddd ghgh dfdsf ddds fddgf ddd ddds ghgh nn"));

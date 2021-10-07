@@ -30,7 +30,7 @@ function getTransposeMatrix(matrix) {
     [9, 10, 11, 12]]));*/
 
 
-function getSumTwoMatrixs (matrix1, matrix2) {
+function sumTwoMatrixs (matrix1, matrix2) {
 
     if (!Array.isArray(matrix1) || !Array.isArray(matrix2)) {
         return [];
@@ -55,7 +55,7 @@ function getSumTwoMatrixs (matrix1, matrix2) {
 
 }
 
-/*console.log( getSumTwoMatrixs ([
+/*console.log( sumTwoMatrixs ([
     [1, 2, 6],
     [1, 2, 6],
     [1, 2, 6]],

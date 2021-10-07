@@ -2,6 +2,10 @@
 
 function getFibonacci(num) {
 
+    if (typeof(num) !== 'number') {
+        return [];
+    }
+
     let first = 0;
     let second = 1;
     let fibonacci = [];
@@ -86,6 +90,10 @@ let circle = {
 
 function getFactorial(num) {
     
+    if (typeof(num) !== 'number') {
+        return [];
+    }
+
     let factorial = 1;
 
     for (let i = 0; i < num; i++) {
@@ -100,7 +108,11 @@ function getFactorial(num) {
 
 //console.log(getFactorial(5));
 
-function getSumMultipleOf2(arr) {
+function countSumMultipleOf2(arr) {
+
+    if (!Array.isArray(arr)) {
+        return [];
+    }
 
     let sum = 0;
 
@@ -115,9 +127,13 @@ function getSumMultipleOf2(arr) {
 
 }
 
-//console.log (getSumMultipleOf2([-2, 4, 6, 7, 8, 9, 10, 12, 20, 21]));
+//console.log (countSumMultipleOf2([2, 4, 6, 7, 8, 9, 10, 12, 20, 21]));
 
-function getSumMultipleOf3(arr) {
+function countSumMultipleOf3(arr) {
+
+    if (!Array.isArray(arr)) {
+        return [];
+    }
 
     let sum = 0;
 
@@ -132,10 +148,14 @@ function getSumMultipleOf3(arr) {
     return sum;
 }
 
-//console.log (getSumMultipleOf3([2, 4, 6, 7, 8, 9, 10, 12, 20, 21]));
+//console.log (countSumMultipleOf3([2, 4, 6, 7, 8, 9, 10, 12, 20, 21]));
 
-function getSumPositive(arr) {
+function countSumPositive(arr) {
     
+    if (!Array.isArray(arr)) {
+        return [];
+    }
+
     let sum = 0;
 
     for (let i = 0; i < arr.length; i++) {
@@ -150,11 +170,15 @@ function getSumPositive(arr) {
 
 }
 
-//console.log (getSumPositive([-2, 4, 6, -7, 8, -9, 10, 12, -20, 21]));
+//console.log (countSumPositive([-2, 4, 6, -7, 8, -9, 10, 12, -20, 21]));
 
 
-function getSumOdd(arr) {
+function countSumOdd(arr) {
     
+    if (!Array.isArray(arr)) {
+        return [];
+    }
+
     let sum = 0;
 
     for (let i = 0; i < arr.length; i++) {
@@ -169,9 +193,13 @@ function getSumOdd(arr) {
 
 }
 
-//console.log (getSumOdd([2, 4, 6, 7, 8, 9, 10, 12, 20, 21]));
+//console.log (countSumOdd([2, 4, 6, 7, 8, 9, 10, 12, 20, 21]));
 
-function getCountedZeroElem(arr) {
+function countZeroElem(arr) {
+
+    if (!Array.isArray(arr)) {
+        return [];
+    }
 
     let counter = 0;
 
@@ -187,10 +215,14 @@ function getCountedZeroElem(arr) {
 
 }
 
-//console.log (getCountedZeroElem([-2, 0, 0, 6, 0, 8, 0, 10, 0, -20, 21]));
+//console.log (countZeroElem([-2, 0, 0, 6, 0, 8, 0, 10, 0, -20, 21]));
 
 
-function getCountedNegativeElem(arr) {
+function countNegativeElem(arr) {
+
+    if (!Array.isArray(arr)) {
+        return [];
+    }
 
     let counter = 0;
 
@@ -206,9 +238,13 @@ function getCountedNegativeElem(arr) {
 
 }
 
-//console.log (getCountedNegativeElem([-2, 0, 0, 6, 0, 8, 0, 10, 0, -20, 21]));
+//console.log (countNegativeElem([-2, 0, 0, 6, 0, 8, 0, 10, 0, -20, 21]));
 
-function getCountedPositiveElem(arr) {
+function countPositiveElem(arr) {
+
+    if (!Array.isArray(arr)) {
+        return [];
+    }
 
     let counter = 0;
 
@@ -224,10 +260,15 @@ function getCountedPositiveElem(arr) {
 
 }
 
-//console.log (getCountedPositiveElem([-2, 0, 0, 6, 0, 8, 0, 10, 0, -20, 21, 4]));
+//console.log (countPositiveElem([-2, 0, 0, 6, 0, 8, 0, 10, 0, -20, 21, 4]));
 
 
-function getCountedPrameElem(arr) {
+function countPrameElem(arr) {
+
+    
+    if (!Array.isArray(arr)) {
+        return [];
+    }
 
     let counter = 0;
 
@@ -267,4 +308,4 @@ function getCountedPrameElem(arr) {
 
 }
 
-//console.log (getCountedPrameElem([2, 11, 0, 3, 0, 8, 0, 7, 0, 5, 21, 4]));
+//console.log (countPrameElem([2, 11, 0, 3, 0, 8, 0, 7, 0, 5, 21, 4]));
