@@ -48,11 +48,11 @@ function calculedAmountNumber(num) {
 
     //let numberArr = num.toString().split("");
     let numberArr = getSeparateNumber(num);
-    let countNumbersArr = [ ];
+    let countNumbersArr = [];
     
     function getSeparateNumber(num) {
 
-        let result = [ ];
+        let result = [];
         let numberSeparate = num;
 
         while (numberSeparate > 0) {

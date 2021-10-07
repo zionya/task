@@ -106,7 +106,7 @@ function getSumMultipleOf2(arr) {
 
     for (let i = 0; i < arr.length; i++) {
 
-        if (arr[i] % 2 === 0 ) {
+        if (arr[i] % 2 === 0) {
             sum += arr[i];
         }
     }
@@ -123,7 +123,7 @@ function getSumMultipleOf3(arr) {
 
     for (let i = 0; i < arr.length; i++) {
 
-        if (arr[i] % 3 === 0 ) {
+        if (arr[i] % 3 === 0) {
             sum += arr[i];
         } 
 
@@ -140,7 +140,7 @@ function getSumPositive(arr) {
 
     for (let i = 0; i < arr.length; i++) {
 
-        if (arr[i] > 0 ) {
+        if (arr[i] > 0) {
             sum += arr[i];
         }
 
@@ -159,7 +159,7 @@ function getSumOdd(arr) {
 
     for (let i = 0; i < arr.length; i++) {
 
-        if(Math.abs(arr[i] % 2) > 0 ) {
+        if(Math.abs(arr[i] % 2) > 0) {
             sum += arr[i];
         } 
 
@@ -177,7 +177,7 @@ function getCountedZeroElem(arr) {
 
     for (let i = 0; i < arr.length; i++) {
 
-        if(arr[i] === 0 ) {
+        if(arr[i] === 0) {
             counter++;
         } 
 
@@ -196,7 +196,7 @@ function getCountedNegativeElem(arr) {
 
     for (let i = 0; i < arr.length; i++) {
 
-        if (arr[i] < 0 ) {
+        if (arr[i] < 0) {
             counter++;
         } 
 
@@ -214,7 +214,7 @@ function getCountedPositiveElem(arr) {
 
     for (let i = 0; i < arr.length; i++) {
 
-        if(arr[i] > 0 ) {
+        if(arr[i] > 0) {
             counter++;
         } 
 

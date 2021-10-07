@@ -2,13 +2,13 @@
 
 function getNumberBinarySys(num) {
 
-    let binary = [ ];
+    let binary = [];
     let numberDecimal = num;
 
     while (numberDecimal > 1) {
 
-        binary.unshift(numberDecimal%2);
-        numberDecimal = Math.floor(numberDecimal/2);
+        binary.unshift(numberDecimal % 2);
+        numberDecimal = Math.floor(numberDecimal / 2);
 
         if (numberDecimal == 1) {
             binary.unshift(numberDecimal);
@@ -333,7 +333,7 @@ function getAverageDoubleArr(arr) {
     for (let i = 0; i < arr.length; i++) {
         
         for (let j = 0; j < arr[i].length; j++){
-            counter ++;
+            counter++;
             sum += arr[i][j];    
         }
 
@@ -386,10 +386,12 @@ function getAverageEvenDoubleArr(arr) {
     for (let i = 0; i < arr.length; i++) {
         
         for (let j = 0; j < arr[i].length; j++){
+
             if (arr[i][j] % 2 == 0) {
-                counter ++;
+                counter++;
                 sum += arr[i][j];    
             }
+
         }
 
     }
@@ -416,7 +418,7 @@ function getAverageOdd(arr) {
     for (let i = 0; i < arr.length; i++) {
 
         if (arr[i] % 2 > 0) {
-            counter ++;
+            counter++;
             sum += arr[i];    
         }
 
@@ -443,8 +445,9 @@ function getAverageOddDoubleArr(arr) {
     for (let i = 0; i < arr.length; i++) {
         
         for (let j = 0; j < arr[i].length; j++) {
+
             if (arr[i][j] % 2 > 0) {
-                counter ++;
+                counter++;
                 sum += arr[i][j];    
             }
         }
@@ -461,5 +464,5 @@ function getAverageOddDoubleArr(arr) {
 
 }
 
-console.log (getAverageOddDoubleArr ([[1, 2], [3, 4], [5, 6], [8, 5]]));
+//console.log (getAverageOddDoubleArr ([[1, 2], [3, 4], [5, 6], [8, 5]]));
 
