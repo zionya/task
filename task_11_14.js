@@ -14,7 +14,7 @@ function getNumberBinarySys(num) {
         binary.unshift(numberDecimal % 2);
         numberDecimal = Math.floor(numberDecimal / 2);
 
-        if (numberDecimal == 1) {
+        if (numberDecimal === 1) {
             binary.unshift(numberDecimal);
         } 
 
@@ -61,7 +61,7 @@ function getNumberDecimalSys(num) {
 
  //console.log(getNumberDecimalSys("1111"));
 
- function countSumMultipleOf2DoubleArr(arr) {
+ function countSumEvenDoubleArr(arr) {
 
     if (!Array.isArray(arr)) {
         return [];
@@ -85,7 +85,7 @@ function getNumberDecimalSys(num) {
 
 }
 
-//console.log (countSumMultipleOf2DoubleArr([[2, 4], [6, 7], [8, 9], [10, 12], [20, 21]]));
+//console.log (countSumEvenDoubleArr([[2, 4], [6, 7], [8, 9], [10, 12], [20, 21]]));
 
 
 function countSumMultipleOf3DoubleArr(arr) {
@@ -366,7 +366,7 @@ function countAverage(arr) {
 
     for (let i = 0; i < arr.length; i++) {
 
-        counter ++;
+        counter++;
         sum += arr[i];
 
     }
@@ -425,8 +425,8 @@ function countAverageEven(arr) {
 
     for (let i = 0; i < arr.length; i++) {
 
-        if (arr[i] % 2 == 0) {
-            counter ++;
+        if (arr[i] % 2 === 0) {
+            counter++;
             sum += arr[i];    
         }
 
@@ -458,7 +458,7 @@ function countAverageEvenDoubleArr(arr) {
         
         for (let j = 0; j < arr[i].length; j++){
 
-            if (arr[i][j] % 2 == 0) {
+            if (arr[i][j] % 2 === 0) {
                 counter++;
                 sum += arr[i][j];    
             }

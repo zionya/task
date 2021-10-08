@@ -9,7 +9,7 @@ function isAnogramma(firstWord, secondWord) {
     let firstLettersArr = firstWord.toLowerCase().split("");
     let secondLettersArr = secondWord.toLowerCase().split("");
 
-    if (firstLettersArr.length != secondLettersArr.length) {
+    if (firstLettersArr.length !== secondLettersArr.length) {
         
         return false;
 
@@ -22,17 +22,17 @@ function isAnogramma(firstWord, secondWord) {
 
         for (let j = 0; j < firstLettersArr.length; j++) {
 
-            if (firstLettersArr[i] == firstLettersArr[j]) {
+            if (firstLettersArr[i] === firstLettersArr[j]) {
                 countI++;
             }
 
-            if (firstLettersArr[i] == secondLettersArr[j]) {
+            if (firstLettersArr[i] === secondLettersArr[j]) {
                 countJ++;
             }
 
         }
 
-        if (countI != countJ) {
+        if (countI !== countJ) {
             
             return false;
 
@@ -75,7 +75,7 @@ function countAmountNumber(num) {
 
         for (let j = 0; j < numberArr.length; j++) {
 
-            if (numberArr[i] == numberArr[j]) {
+            if (numberArr[i] === numberArr[j]) {
 
                 count++;
 
@@ -111,9 +111,9 @@ function countUnigueWords(str) {
 
         for (let i = 0; i < arr.length; i++) {
 
-            if (arr[index] == arr[i]) {
+            if (arr[index] === arr[i]) {
 
-                if (index != i) {
+                if (index !== i) {
                     return false;
                 }
 
@@ -149,7 +149,7 @@ function countWords(str) {
 
         for (let i = 0; i < newArr.length; i++) {
 
-            if (wordsArr[index] == newArr[i]) {
+            if (wordsArr[index] === newArr[i]) {
 
                     return false;
 
@@ -164,7 +164,7 @@ function countWords(str) {
 
     for (let i = 0; i < wordsArr.length; i++) {
         
-        if (i == 0) {
+        if (i === 0) {
 
             uniqueWords.push(wordsArr[i]);
 
@@ -184,7 +184,7 @@ function countWords(str) {
 
         for (let j = 0; j < wordsArr.length; j++) {
 
-            if (uniqueWords[i] == wordsArr[j]) {
+            if (uniqueWords[i] === wordsArr[j]) {
 
                 count++;
 

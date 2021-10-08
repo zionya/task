@@ -108,7 +108,7 @@ function getFactorial(num) {
 
 //console.log(getFactorial(5));
 
-function countSumMultipleOf2(arr) {
+function countSumEven(arr) {
 
     if (!Array.isArray(arr)) {
         return [];
@@ -127,9 +127,9 @@ function countSumMultipleOf2(arr) {
 
 }
 
-//console.log (countSumMultipleOf2([2, 4, 6, 7, 8, 9, 10, 12, 20, 21]));
+//console.log (countSumEven([2, 4, 6, 7, 8, 9, 10, 12, 20, 21]));
 
-function countSumMultipleOf3(arr) {
+function countSumMultiple3(arr) {
 
     if (!Array.isArray(arr)) {
         return [];
@@ -148,7 +148,7 @@ function countSumMultipleOf3(arr) {
     return sum;
 }
 
-//console.log (countSumMultipleOf3([2, 4, 6, 7, 8, 9, 10, 12, 20, 21]));
+//console.log (countSumMultiple3([2, 4, 6, 7, 8, 9, 10, 12, 20, 21]));
 
 function countSumPositive(arr) {
     
