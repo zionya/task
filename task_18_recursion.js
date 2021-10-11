@@ -6,8 +6,8 @@ function isAnogramma(firstWord, secondWord) {
         return [];
     }
 
-    let firstLettersArr = firstWord.toLowerCase().split("");
-    let secondLettersArr = secondWord.toLowerCase().split("");
+    let firstLettersArr = firstWord.toLowerCase();
+    let secondLettersArr = secondWord.toLowerCase();
 
     if (firstLettersArr.length !== secondLettersArr.length) {
         
@@ -44,10 +44,10 @@ function isAnogramma(firstWord, secondWord) {
 
 }
 
-//console.log(isAnogramma("asdsG", "gdass"));
+//console.log(isAnogramma("ashsG", "gdass"));
 
 
-function countAmountNumber(num) {
+function countNumber(num) {
 
     //let numberArr = num.toString().split("");
     let numberArr = getSeparateNumber(num);
@@ -208,138 +208,103 @@ function countWords(str) {
 
 //console.log(countWords("dffd ddd ghgh dfdsf ddds fddgf ddd ddds ghgh nn"));
 
+
 function getFibonacci(num) {
 
-    if (typeof(num) !== 'number') {
-        return [];
-    }
+    num = num || 0;
 
     let first = 0;
     let second = 1;
+
     let fibonacci = [];
 
     if (num < 1) {
         return fibonacci;
-    } 
-
-    fibonacci.push(first);
-
-    if (num < 2) {
-        return fibonacci;
     }
 
-    fibonacci.push(second);
-
-    for (let i = 2; i < num; i++) {
-
-        let nextNumber = first + second;
-        fibonacci.push(nextNumber);
-        first = second;
-        second = nextNumber;
-
+    if (--num > 0) {
+        fibonacci = getFibonacci(num);
     }
+    
+    if (num == 0) {
 
+        fibonacci.push(first);
+
+    } else if (num == 1) {
+
+        fibonacci.push(second);
+
+    } else {
+
+        fibonacci.push(fibonacci[fibonacci.length - 2] + fibonacci[fibonacci.length - 1]);
+       
+    }
+    
     return fibonacci;
-
-}
-//console.log(getFibonacci(3));
-
-function Rectangle(width, height) {
-    this.width = width || 0;
-    this.height = height || 0;
 }
 
-Rectangle.prototype.perimeter = function() {
-    return 2 * (this.height + this.width);
-};
-Rectangle.prototype.square = function() {
-    return this.height * this.width;
-};
-
-//let rect = new Rectangle(5, 10);
-//console.log(rect.perimeter());
-//console.log(rect.square());
-
-function Triangle(side1, side2, side3) {
-    this.side1 = side1 || 0;
-    this.side2 = side2 || 0;
-    this.side3 = side3 || 0;
-}
-
-Triangle.prototype.perimeter = function() {
-    return this.side1 + this.side2 + this.side3;
-};
-
-Triangle.prototype.square = function() {
-    
-    let semiPerimeter = (this.side1 + this.side2 + this.side3) / 2;
-    
-    return Math.sqrt(semiPerimeter * (semiPerimeter - this.side1) * (semiPerimeter - this.side2) * (semiPerimeter - this.side3));
-};
-
-//let triangle = new Triangle(4, 5, 6);
-//console.log(triangle.perimeter());
-//console.log(triangle.square());
-
-function Circle(radius) {
-    this.radius = radius || 0;
-}
-
-Circle.prototype.length = function() {
-    return 2 * Math.PI * this.radius;
-};
-
-Circle.prototype.square = function() {
-    return Math.PI * this.radius * this.radius;
-};
-
-//let circle = new Circle (5);
-//console.log(circle.length());
-//console.log(circle.square()); 
+//console.log(getFibonacci(5));
 
 function getFactorial(num) {
     
-    if (typeof(num) !== 'number') {
-        return [];
+    num = num || 0;
+
+    let factorial;
+
+    if (num > 0) {
+        factorial = getFactorial(--num);
+    } else {
+        factorial = 1;
     }
 
-    let factorial = 1;
-
-    for (let i = 0; i < num; i++) {
-
-        factorial = factorial * (i + 1);
-
-    }
-
-    return factorial;
+    return factorial * (++num);
 
 }
 
-//console.log(getFactorial(5));
+//console.log(getFactorial(1));
 
-Array.prototype.sum = function(compare) {
 
-    let sum = 0;
+let arr = [2, 8, 0, 7, 8, 9, 0, 12, 0, 21];
 
-    for (let i = 0; i < this.length; i++) {
+Array.prototype.sum = function (compare, index) {
 
-        if ( compare(this[i]) ) {
-            sum += this[i];
-        }
+    index = index || 0;
+    let result = 0;
+
+    if (index < this.length) {
+    
+        result = this.sum(compare, ++index);
+        --index;      
+
+    }
+    
+    if (compare(this[index])) {
+        
+        result += this[index]
+
     }
 
-    return sum;
+    return result;
+
 };
 
-Array.prototype.countElem = function(compare) {
+//console.log(arr.sum(a => a % 3 === 0));
+
+Array.prototype.countElem = function(compare, index) {
     
+    index = index || 0;
     let counter = 0;
 
-    for (let i = 0; i < this.length; i++) {
+    if (index < this.length) {
+    
+        counter = this.countElem(compare, ++index);
+        --index;      
 
-        if( compare(this[i]) ) {
-            counter++;
-        } 
+    }
+    
+    if (compare(this[index])) {
+        
+        counter++
 
     }
 
@@ -347,39 +312,7 @@ Array.prototype.countElem = function(compare) {
 
 };
 
-//let arr = [2, 11, 0, 7, 8, 9, 10, 12, 20, 21];
-
-//console.log(arr.sum(a => a % 2 === 0));
-//console.log(arr.sum(a => a % 3 === 0));
-//console.log(arr.sum(a => a > 0));
-//console.log(arr.sum(a => Math.abs(a % 2) > 0));
-
 //console.log(arr.countElem(a => a === 0));
-//console.log(arr.countElem(a => a < 0));
-//console.log(arr.countElem(a => a > 0));
-/*console.log(arr.countElem(a => {
-    
-    let counter = 0;
-
-    if (a < 2) {
-        return false;
-    }
-
-    for (let i = 1; i < a; i++) {
-
-        if (a % i === 0) {
-            counter++;
-        }
-
-    }
-
-    if (counter > 1) {
-        return false;
-    } 
-
-    return true;
-
-}));*/
 
 function getNumberBinarySys(num) {
 
@@ -514,7 +447,7 @@ function sumMinMax(min, max, compare) {
 //console.log(sumMinMax(-5, 5, a => a > 0));
 
 //let arr = [1, 2, 3, 4, 5, 6, 7];
-let arr = [[1, 2], [3, 4], [5, 6], [7, 5]];
+//let arr = [[1, 2], [3, 4], [5, 6], [7, 5]];
 
 Array.prototype.avarage = function(compare) {
 

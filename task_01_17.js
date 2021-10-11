@@ -44,10 +44,10 @@ function isAnogramma(firstWord, secondWord) {
 
 }
 
-console.log(isAnogramma("asdsG", "gdass"));
+//console.log(isAnogramma("asdsG", "gdass"));
 
 
-function countAmountNumber(num) {
+function countNumber(num) {
 
     //let numberArr = num.toString().split("");
     let numberArr = getSeparateNumber(num);
@@ -99,7 +99,7 @@ function countAmountNumber(num) {
     
 }
 
-//console.log(countAmountNumber(123559990));
+//console.log(countNumber(123559990));
 
 function countUnigueWords(str) {
 
