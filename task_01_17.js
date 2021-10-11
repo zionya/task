@@ -386,21 +386,17 @@ function getNumberBinarySys(num) {
     let numberDecimal = Number(num) || 0;
     let binary = [];
 
-    while (numberDecimal > 1) {
+    while (numberDecimal > 0) {
 
         binary.unshift(numberDecimal % 2);
         numberDecimal = Math.floor(numberDecimal / 2);
-
-        if (numberDecimal === 1) {
-            binary.unshift(numberDecimal);
-        } 
 
     }
 
     return Number(binary.join(""));
 }
 
-//console.log(getNumberBinarySys(14));
+//console.log(getNumberBinarySys(15));
 
 function getNumberDecimalSys(num) {
 
@@ -410,15 +406,15 @@ function getNumberDecimalSys(num) {
 
     function pow(num, pow) {
 
-      let result = 1;
+        let result = 1;
 
-      for (let i = 0; i < pow; i++) {
+        for (let i = 0; i < pow; i++) {
 
-        result *= num;
+            result *= num;
 
-      }
+        }
 
-      return result;
+        return result;
     }
 
 

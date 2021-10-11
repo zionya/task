@@ -263,9 +263,6 @@ function getFactorial(num) {
 
 //console.log(getFactorial(1));
 
-
-let arr = [2, 8, 0, 7, 8, 9, 0, 12, 0, 21];
-
 Array.prototype.sum = function (compare, index) {
 
     index = index || 0;
@@ -280,15 +277,13 @@ Array.prototype.sum = function (compare, index) {
     
     if (compare(this[index])) {
         
-        result += this[index]
+        result += this[index];
 
     }
 
     return result;
 
 };
-
-//console.log(arr.sum(a => a % 3 === 0));
 
 Array.prototype.countElem = function(compare, index) {
     
@@ -304,7 +299,7 @@ Array.prototype.countElem = function(compare, index) {
     
     if (compare(this[index])) {
         
-        counter++
+        counter++;
 
     }
 
@@ -318,112 +313,131 @@ function getNumberBinarySys(num) {
 
     let numberDecimal = Number(num) || 0;
     let binary = [];
-
-    while (numberDecimal > 1) {
-
-        binary.unshift(numberDecimal % 2);
-        numberDecimal = Math.floor(numberDecimal / 2);
-
-        if (numberDecimal === 1) {
-            binary.unshift(numberDecimal);
-        } 
+    
+    if (numberDecimal > 1) {
+    
+        binary = getNumberBinarySys( Math.floor(numberDecimal / 2));
 
     }
+        
+    binary.push(numberDecimal % 2);
 
-    return Number(binary.join(""));
+    return binary;
 }
 
-//console.log(getNumberBinarySys(14));
+function getNumberDecimalSys(num, index) {
 
-function getNumberDecimalSys(num) {
+    num = num || 0;
+    index = index || 0;
 
-    if (typeof(num) !== 'number' && typeof(num) !== 'string') {
-        return [];
-    }
+    function myPow(num, pow, index) {
 
-    function pow(num, pow) {
+        index = index || 0;
+        let result = 1;
 
-      let result = 1;
+        if(pow == 0){
+            return result;
+        }
 
-      for (let i = 0; i < pow; i++) {
+        if (++index < pow) {
+            
+            result = myPow(num, pow, index);
+            --index;
 
+        }
+        
         result *= num;
 
-      }
-
-      return result;
+        return result;
     }
 
 
     let decimal = 0; 
     let binary = num.toString();
 
-    for (let i = 0; i < binary.length; i++) {
-        
-        if (binary[i] > 0) {
-            decimal += pow(2, (binary.length - i - 1));
-        }
+    if (index < binary.length) {
+
+        decimal = getNumberDecimalSys(num, ++index);
+        --index;
+
+    }
+    if (binary[index] > 0) {
+
+        decimal += myPow(2, (binary.length - index - 1));
+
     }
 
     return decimal;
   
 }
 
-//console.log(getNumberDecimalSys("1111"));
+Array.prototype.sumDoubleArr = function(compare, indexI, indexJ) {
 
-Array.prototype.sumDoubleArr = function(compare) {
+    indexI = indexI || 0;
+    indexJ = indexJ || 0;
 
     let sum = 0;
 
-    for (let i = 0; i < this.length; i++) {
+    if (indexI < this.length) {
+                
+        if (indexJ < this[indexI].length) {
+            
+            sum = this.sumDoubleArr(compare, indexI, ++indexJ);
+            --indexJ;
+        
+            if ( compare(this[indexI][indexJ]) ) {
 
-        for (let j = 0; j < this[i].length; j++) {
+                sum += this[indexI][indexJ];
 
-            if ( compare(this[i][j]) ) {
-                sum += arr[i][j];
             }
 
+            return sum;
+        
         }
 
-    }
+        indexJ = 0;
 
+        sum = this.sumDoubleArr(compare, ++indexI, indexJ);
+        
+    }
+    
     return sum;
 
 };
 
-Array.prototype.countElemDoubleArr = function(compare) {
+Array.prototype.countElemDoubleArr = function(compare, indexI, indexJ) {
+    
+    indexI = indexI || 0;
+    indexJ = indexJ || 0;
 
     let counter = 0;
 
-    for (let i = 0; i < this.length; i++) {
+    if (indexI < this.length) {
+                
+        if (indexJ < this[indexI].length) {
+            
+            counter = this.countElemDoubleArr(compare, indexI, ++indexJ);
+            --indexJ;
 
-        for (let j = 0; j < this[i].length; j++) {
+            if ( compare(this[indexI][indexJ]) ) {
 
-            if ( compare(this[i][j]) ) {
                 counter++;
+
             }
+            
+            return counter;
+        
+        }
 
-        } 
+        indexJ = 0;
 
+        counter = this.countElemDoubleArr(compare, ++indexI, indexJ);
+        
     }
-
+    
     return counter;
-
 }
 
-
-//let arr = [[-2, 4], [-6, 7], [8, -9], [10, 12], [20, 21]];
-
-//console.log(arr.sumDoubleArr(a => a % 2 === 0))
-//console.log(arr.sumDoubleArr(a => a % 3 === 0))
-//console.log(arr.sumDoubleArr(a => a > 0))
-//console.log(arr.sumDoubleArr(a => Math.abs(a % 2) > 0))
-
-//let arr = [[2, 4], [0, -7], [8, 0], [-10, 0], [20, 21]];
-
-//console.log(arr.countElemDoubleArr(a => a === 0));
-//console.log(arr.countElemDoubleArr(a => a < 0));
-//console.log(arr.countElemDoubleArr(a => a > 0));
 
 function sumMinMax(min, max, compare) {
 
@@ -432,17 +446,22 @@ function sumMinMax(min, max, compare) {
     
     let sum = 0;
 
-    for (let i = min; i <= max; i++) {
+    if (min <= max) {
 
-        if( compare(i) ) {
-            sum += i;
+        sum = sumMinMax (++min, max, compare);
+        
+        --min;
+
+        if( compare(min) ) {
+            sum += min;
         }
 
     }
+
     return sum;
 }
 
-//console.log(sumMinMax(1, 5, a => true));
+
 //console.log(sumMinMax(1, 9, a => a % 3 === 0));
 //console.log(sumMinMax(-5, 5, a => a > 0));
 
