@@ -6,8 +6,8 @@ function isAnogramma(firstWord, secondWord) {
         return [];
     }
 
-    let firstLettersArr = firstWord.toLowerCase().split("");
-    let secondLettersArr = secondWord.toLowerCase().split("");
+    let firstLettersArr = firstWord.toLowerCase();
+    let secondLettersArr = secondWord.toLowerCase();
 
     if (firstLettersArr.length !== secondLettersArr.length) {
         
@@ -44,7 +44,7 @@ function isAnogramma(firstWord, secondWord) {
 
 }
 
-//console.log(isAnogramma("asdsG", "gdass"));
+console.log(isAnogramma("asdsG", "gdass"));
 
 
 function countAmountNumber(num) {
