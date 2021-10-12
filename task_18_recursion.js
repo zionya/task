@@ -1,70 +1,87 @@
 "use strict"
 
-function isAnogramma(firstWord, secondWord) {
+function isAnogramma(firstWord, secondWord, index) {
 
-    if (typeof(firstWord) !== "string" || typeof(firstWord) !== "string") {
-        return [];
-    }
+    index = index || 0;
 
-    let firstLettersArr = firstWord.toLowerCase();
-    let secondLettersArr = secondWord.toLowerCase();
+    let firstWordLower = firstWord.toLowerCase();
+    let secondWordLower = secondWord.toLowerCase();
 
-    if (firstLettersArr.length !== secondLettersArr.length) {
+    let result = false;
+
+    if (firstWordLower.length !== secondWordLower.length) {
         
-        return false;
+        return result;
 
     }
+    
+    function checkLetters(word1, word2, indexI, index) {
 
-    for (let i = 0; i < firstLettersArr.length; i++) {
+        index = index || 0;
+        indexI = indexI || 0;
+        
 
-        let countI = 0;
-        let countJ = 0;
+        let count = {
+            "i": 0,
+            "j": 0,
+        };
 
-        for (let j = 0; j < firstLettersArr.length; j++) {
+        if (++index <= word1.length) {
 
-            if (firstLettersArr[i] === firstLettersArr[j]) {
-                countI++;
+            count = checkLetters(word1, word2, indexI, index);
+            --index;
+
+            if (word1[indexI] === word1[index]) {
+                count["i"]++;
             }
 
-            if (firstLettersArr[i] === secondLettersArr[j]) {
-                countJ++;
+            if (word1[indexI] === word2[index]) {
+                count["j"]++;
             }
+        }
+        
+        if (index > 0) {
+
+            return count;
 
         }
 
-        if (countI !== countJ) {
-            
-            return false;
-
-        } 
+            return count["i"] === count["j"];
 
     }
 
-    return true;
+
+
+    if (++index <= firstWordLower.length) {
+
+        result = checkLetters(firstWordLower, secondWordLower, index);
+        
+    }
+    
+    return result;
 
 }
 
-//console.log(isAnogramma("ashsG", "gdass"));
 
-
-function countNumber(num) {
+function count(num) {
 
     //let numberArr = num.toString().split("");
     let numberArr = getSeparateNumber(num);
     let countNumbersArr = [];
     
+
     function getSeparateNumber(num) {
 
         let result = [];
         let numberSeparate = num;
 
-        while (numberSeparate > 0) {
+        if (numberSeparate > 0){
 
-            result.unshift(numberSeparate % 10);
-            numberSeparate = Math.floor (numberSeparate / 10);
+            result = getSeparateNumber(Math.floor(numberSeparate / 10))
 
+            result.push(numberSeparate % 10);
         }
-
+        
         return result;
 
     }
@@ -99,11 +116,89 @@ function countNumber(num) {
     
 }
 
-//console.log(countAmountNumber(123559990));
+function countNumber(num) {
+
+    //let numberArr = num.toString().split("");
+    let numberArr = getSeparateNumber(num);
+    let countNumbersArr = [];
+    
+
+    function getSeparateNumber(num) {
+
+        let result = [];
+        let numberSeparate = num;
+
+        if (numberSeparate > 0){
+
+            result = getSeparateNumber(Math.floor(numberSeparate / 10))
+
+            result.push(numberSeparate % 10);
+        }
+        
+        return result;
+
+    }
+    function getCount(arr, indexI, index) {
+
+        index = index || 0;
+        indexI = indexI || 0;
+
+        let count = 0;
+
+        if (++index < arr.length) {
+
+            count = getCount(arr, indexI, index);
+
+        }
+
+        if (arr[indexI] === arr[index]) {
+
+            count++;
+
+        }
+        
+        return count;
+
+    }
+
+    for (let i = 0; i < numberArr.length; i++) {
+
+        count = getCount(numberArr, i)
+        console.log(numberArr[i], count)
+        /*let count = 0;
+
+        for (let j = 0; j < numberArr.length; j++) {
+
+            if (numberArr[i] === numberArr[j]) {
+
+                count++;
+
+            }
+
+        }*/
+
+        countNumbersArr.push(count);
+
+    }
+
+    let countedNumbers = {};
+
+    for (let i = 0; i < numberArr.length; i++) {
+
+        countedNumbers[numberArr[i]] = countNumbersArr[i];
+
+    }
+    
+    return countedNumbers;
+    
+}
+
+console.log(count(123559990));
+console.log(countNumber(123559990));
 
 function countUnigueWords(str) {
 
-    if (typeof(str) !== "string"){
+    if (typeof(str) !== "string") {
         return {};
     }
 
@@ -141,7 +236,7 @@ function countUnigueWords(str) {
 function countWords(str) {
 
 
-    if (typeof(str) !== "string"){
+    if (typeof(str) !== "string") {
         return {};
     }
 
@@ -335,7 +430,7 @@ function getNumberDecimalSys(num, index) {
         index = index || 0;
         let result = 1;
 
-        if(pow == 0){
+        if(pow == 0) {
             return result;
         }
 
@@ -461,70 +556,109 @@ function sumMinMax(min, max, compare) {
     return sum;
 }
 
+Array.prototype.avarage = function(compare, index) {
 
-//console.log(sumMinMax(1, 9, a => a % 3 === 0));
-//console.log(sumMinMax(-5, 5, a => a > 0));
+    index = index || 0;
 
-//let arr = [1, 2, 3, 4, 5, 6, 7];
-//let arr = [[1, 2], [3, 4], [5, 6], [7, 5]];
+    let result = {
+        "counter": 0,
+        "sum": 0,
+    };
 
-Array.prototype.avarage = function(compare) {
-
-    let counter = 0;
-    let sum = 0;
-
-    for (let i = 0; i < this.length; i++) {
-
-        if( compare(this[i]) ) {
-            counter++;
-            sum += this[i];
-        }
-
-    }
-
-    if (counter === 0) {
-
-        return 0;
-
-    }
-
-    return sum / counter;
-
-};
-
-Array.prototype.avarageDoubleArr = function(compare) {
-
-    let counter = 0;
-    let sum = 0;
-
-    for (let i = 0; i < this.length; i++) {
+    //
+    if (index < this.length) {
+    
+        result = this.avarage(compare, ++index);
         
-        for (let j = 0; j < this[i].length; j++){
-            
-            if( compare(this[i][j]) ) {
-                counter++;
-                sum += this[i][j];
-            }    
+        --index;   
+        
+        if (compare(this[index])) {
+        
+            result["counter"] += 1;
+            result["sum"] += this[index];;
+    
         }
 
     }
+        
+    if (index > 0) {
 
-    if (counter === 0) {
+        return result;
+
+    } 
+
+    if (result["counter"] === 0) {
 
         return 0;
 
     }
 
-    return sum / counter;
+    return result["sum"] / result["counter"];
 
 };
 
-//console.log(arr.avarage(a => true));
-//console.log(arr.avarage(a => a % 2 === 0));
-//console.log(arr.avarage(a => Math.abs(a % 2) > 0));
+Array.prototype.avarageDoubleArr = function(compare, index) {
+
+    index = index || 0;
+
+ 
+    let result = {
+        "counter": 0,
+        "sum": 0,
+    };
+    
+    function sumElem(compare, arr, index) {
+        
+        index = index || 0;
+
+        let result = {
+            "counter": 0,
+            "sum": 0,
+        };
+
+        if (++index <= arr.length) {
+
+             result = sumElem(compare, arr, index);
+             --index;
+
+            if (compare(arr[index])) {
+                
+                result["counter"]++;
+                result["sum"] += arr[index]; 
+
+            }
+        }
+        
+        return result;
+
+    }
+
+    if (index < this.length) {
+
+        result = this.avarageDoubleArr(compare, ++index)
+        --index;
+        let sum = sumElem(compare, this[index]);
+        result["counter"] += sum["counter"];
+        result["sum"] += sum["sum"];
+
+    }
+
+    if (index > 0) {
+
+        return result;
+
+    }
+
+    if (result["counter"] === 0) {
+
+        return 0;
+
+    }
+
+    return result["sum"] / result["counter"];
+};
 
 
-//console.log(arr.avarageDoubleArr(a => true));
 //console.log(arr.avarageDoubleArr(a => a % 2 === 0));
 //console.log(arr.avarageDoubleArr(a => Math.abs(a % 2) > 0));
 

@@ -2,31 +2,31 @@
 
 function isAnogramma(firstWord, secondWord) {
 
-    if (typeof(firstWord) !== "string" || typeof(firstWord) !== "string") {
+    if (typeof(firstWord) !== "string" || typeof(secondWord) !== "string") {
         return [];
     }
 
-    let firstLettersArr = firstWord.toLowerCase();
-    let secondLettersArr = secondWord.toLowerCase();
+    let firstWordLower = firstWord.toLowerCase();
+    let secondWordLower = secondWord.toLowerCase();
 
-    if (firstLettersArr.length !== secondLettersArr.length) {
+    if (firstWordLower.length !== secondWordLower.length) {
         
         return false;
 
     }
 
-    for (let i = 0; i < firstLettersArr.length; i++) {
+    for (let i = 0; i < firstWordLower.length; i++) {
 
         let countI = 0;
         let countJ = 0;
 
-        for (let j = 0; j < firstLettersArr.length; j++) {
+        for (let j = 0; j < firstWordLower.length; j++) {
 
-            if (firstLettersArr[i] === firstLettersArr[j]) {
+            if (firstWordLower[i] === firstWordLower[j]) {
                 countI++;
             }
 
-            if (firstLettersArr[i] === secondLettersArr[j]) {
+            if (firstWordLower[i] === secondWordLower[j]) {
                 countJ++;
             }
 
@@ -44,12 +44,14 @@ function isAnogramma(firstWord, secondWord) {
 
 }
 
-//console.log(isAnogramma("asdsG", "gdass"));
+
+//console.log(isAnogramma("asDsG", "gdass"));
 
 
 function countNumber(num) {
 
-    //let numberArr = num.toString().split("");
+    num = num || 0;
+
     let numberArr = getSeparateNumber(num);
     let countNumbersArr = [];
     
