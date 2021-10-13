@@ -105,7 +105,7 @@ function countNumber(num) {
 
 function countUnigueWords(str) {
 
-    if (typeof(str) !== "string"){
+    if (typeof(str) !== "string" || str === "") {
         return {};
     }
 
@@ -125,86 +125,45 @@ function countUnigueWords(str) {
     }
 
     let wordsArr = str.toLowerCase().split(" ");
-    let uniqueWords = 0;
+    let count = 0;
 
     for (let i = 0; i < wordsArr.length; i++) {
         
         if ( isUnigueWord(wordsArr, i) ) {
-            uniqueWords++;
+            count++;
         }
                 
     }
 
-    return uniqueWords;
+    return count;
 }
 
 //console.log(countUnigueWords("dffd ddd ghgh dfdsf nn ddds fddgf ddd nn ddds ghgh"));
 
 function countWords(str) {
 
-
-    if (typeof(str) !== "string"){
+    if (typeof(str) !== "string") {
         return {};
     }
 
-    function isWordInArr(wordsArr, newArr, index) {
-
-        for (let i = 0; i < newArr.length; i++) {
-
-            if (wordsArr[index] === newArr[i]) {
-
-                    return false;
-
-            }
-        }
-        return true;
-    }
-
     let wordsArr = str.toLowerCase().split(" ");
-    let uniqueWords = [];
-    let countUniqueWords = [];
+    let result = {};
 
     for (let i = 0; i < wordsArr.length; i++) {
-        
-        if (i === 0) {
 
-            uniqueWords.push(wordsArr[i]);
+        if ( result[wordsArr[i]] === undefined ) {
+
+            result[wordsArr[i]] = 1;
 
         } else {
 
-            if ( isWordInArr(wordsArr, uniqueWords, i) ) {
-                uniqueWords.push(wordsArr[i]);
-            }
+            result[wordsArr[i]]++;
 
         }
 
     }
-
-    for (let i = 0; i < uniqueWords.length; i++) {
-
-        let count = 0;
-
-        for (let j = 0; j < wordsArr.length; j++) {
-
-            if (uniqueWords[i] === wordsArr[j]) {
-
-                count++;
-
-            }
-        }
-
-        countUniqueWords.push(count);
-    }
-
-    let baseWordsCount = {};
-
-    for (let i = 0; i < uniqueWords.length; i++) {
-
-        baseWordsCount[uniqueWords[i]] = countUniqueWords[i];    
-
-    }
-
-    return baseWordsCount;
+    
+    return result;
     
 }
 
@@ -339,7 +298,7 @@ Array.prototype.countElem = function(compare) {
 
     for (let i = 0; i < this.length; i++) {
 
-        if( compare(this[i]) ) {
+        if ( compare(this[i]) ) {
             counter++;
         } 
 
@@ -499,7 +458,7 @@ function sumMinMax(min, max, compare) {
 
     for (let i = min; i <= max; i++) {
 
-        if( compare(i) ) {
+        if ( compare(i) ) {
             sum += i;
         }
 
@@ -521,7 +480,7 @@ Array.prototype.avarage = function(compare) {
 
     for (let i = 0; i < this.length; i++) {
 
-        if( compare(this[i]) ) {
+        if ( compare(this[i]) ) {
             counter++;
             sum += this[i];
         }
@@ -545,9 +504,9 @@ Array.prototype.avarageDoubleArr = function(compare) {
 
     for (let i = 0; i < this.length; i++) {
         
-        for (let j = 0; j < this[i].length; j++){
+        for (let j = 0; j < this[i].length; j++) {
             
-            if( compare(this[i][j]) ) {
+            if ( compare(this[i][j]) ) {
                 counter++;
                 sum += this[i][j];
             }    

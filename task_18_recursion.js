@@ -19,7 +19,6 @@ function isAnogramma(firstWord, secondWord, index) {
 
         index = index || 0;
         indexI = indexI || 0;
-        
 
         let count = {
             "i": 0,
@@ -50,8 +49,6 @@ function isAnogramma(firstWord, secondWord, index) {
 
     }
 
-
-
     if (++index <= firstWordLower.length) {
 
         result = checkLetters(firstWordLower, secondWordLower, index);
@@ -60,60 +57,6 @@ function isAnogramma(firstWord, secondWord, index) {
     
     return result;
 
-}
-
-
-function count(num) {
-
-    //let numberArr = num.toString().split("");
-    let numberArr = getSeparateNumber(num);
-    let countNumbersArr = [];
-    
-
-    function getSeparateNumber(num) {
-
-        let result = [];
-        let numberSeparate = num;
-
-        if (numberSeparate > 0){
-
-            result = getSeparateNumber(Math.floor(numberSeparate / 10))
-
-            result.push(numberSeparate % 10);
-        }
-        
-        return result;
-
-    }
-
-    for (let i = 0; i < numberArr.length; i++) {
-
-        let count = 0;
-
-        for (let j = 0; j < numberArr.length; j++) {
-
-            if (numberArr[i] === numberArr[j]) {
-
-                count++;
-
-            }
-
-        }
-
-        countNumbersArr.push(count);
-
-    }
-
-    let countedNumbers = {};
-
-    for (let i = 0; i < numberArr.length; i++) {
-
-        countedNumbers[numberArr[i]] = countNumbersArr[i];
-
-    }
-    
-    return countedNumbers;
-    
 }
 
 function countNumber(num, index) {
@@ -128,16 +71,17 @@ function countNumber(num, index) {
         let result = [];
         let numberSeparate = num;
 
-        if (numberSeparate > 0){
+        if (numberSeparate > 0) {
 
-            result = getSeparateNumber(Math.floor(numberSeparate / 10))
-
+            result = getSeparateNumber( Math.floor(numberSeparate / 10) );
             result.push(numberSeparate % 10);
+
         }
         
         return result;
 
     }
+
     function getCount(arr, indexI, index) {
 
         index = index || 0;
@@ -148,32 +92,30 @@ function countNumber(num, index) {
         if (++index <= arr.length) {
 
             count = getCount(arr, indexI, index);
-           
-            if (arr[indexI] === arr[--index]) {
+           --index;
+
+            if (arr[indexI] === arr[index]) {
 
                 count++;
 
             }
-            console.log( arr[indexI], arr[--index], count)
-        }
+         }
        
         return count;
 
     }
+
     if (++index < numberArr.length) {
 
         countNumbersArr = countNumber(num, index);
         
     }
-    //console.log(countNumbersArr)
-    countNumbersArr.push( getCount(numberArr, index) );
 
-    if (index > 1) {
+    countNumbersArr.unshift( getCount(numberArr, --index) );
+
+    if (index > 0) {
         return countNumbersArr;
     }
-
-    console.log("len", numberArr)
-    console.log("len", countNumbersArr)
 
     let countedNumbers = {};
 
@@ -182,121 +124,88 @@ function countNumber(num, index) {
         countedNumbers[numberArr[i]] = countNumbersArr[i];
 
     }
-    
+        
     return countedNumbers;
     
 }
 
-console.log(count(123559990));
-console.log(countNumber(123559990));
+function countUnigueWords(str, index) {
 
-function countUnigueWords(str) {
+    index = index || 0;
 
-    if (typeof(str) !== "string") {
-        return {};
+    if (typeof(str) !== "string" || str === "") {
+        return null;
     }
 
-    function isUnigueWord(arr, index) {
+    function isUnigueWord(arr, indexI, index) {
 
-        for (let i = 0; i < arr.length; i++) {
+        index = index || 0;
 
-            if (arr[index] === arr[i]) {
+        let result = true;
 
-                if (index !== i) {
-                    return false;
+        if (++index <= arr.length) {
+
+            result = isUnigueWord(arr, indexI, index);
+            --index;
+            if (arr[indexI] === arr[index]) {
+
+                if (indexI !== index) {
+                    result = false;
                 }
 
             }
         }
-        return true;
+        
+        return result;
     }
 
     let wordsArr = str.toLowerCase().split(" ");
-    let uniqueWords = 0;
+    let count = 0;
 
-    for (let i = 0; i < wordsArr.length; i++) {
-        
-        if ( isUnigueWord(wordsArr, i) ) {
-            uniqueWords++;
+    if (index < wordsArr.length) {
+
+        count = countUnigueWords(str, ++index);
+
+        if ( isUnigueWord(wordsArr, index) ) {
+
+            count++;
+
+        }
+
+    }
+    
+    return count;
+
+}
+
+function countWords(str, index) {
+
+    index = index || 0;
+
+    let wordsArr = str.toLowerCase().split(" ");
+    let result = {};
+
+    if (++index <= wordsArr.length) {
+
+        result = countWords(str, index);
+
+        --index;
+
+        if ( result[wordsArr[index]] === undefined ) {
+
+            result[wordsArr[index]] = 1;
+    
+        } else {
+    
+            result[wordsArr[index]]++;
+    
         }
                 
     }
-
-    return uniqueWords;
-}
-
-//console.log(countUnigueWords("dffd ddd ghgh dfdsf nn ddds fddgf ddd nn ddds ghgh"));
-
-function countWords(str) {
-
-
-    if (typeof(str) !== "string") {
-        return {};
-    }
-
-    function isWordInArr(wordsArr, newArr, index) {
-
-        for (let i = 0; i < newArr.length; i++) {
-
-            if (wordsArr[index] === newArr[i]) {
-
-                    return false;
-
-            }
-        }
-        return true;
-    }
-
-    let wordsArr = str.toLowerCase().split(" ");
-    let uniqueWords = [];
-    let countUniqueWords = [];
-
-    for (let i = 0; i < wordsArr.length; i++) {
         
-        if (i === 0) {
-
-            uniqueWords.push(wordsArr[i]);
-
-        } else {
-
-            if ( isWordInArr(wordsArr, uniqueWords, i) ) {
-                uniqueWords.push(wordsArr[i]);
-            }
-
-        }
-
-    }
-
-    for (let i = 0; i < uniqueWords.length; i++) {
-
-        let count = 0;
-
-        for (let j = 0; j < wordsArr.length; j++) {
-
-            if (uniqueWords[i] === wordsArr[j]) {
-
-                count++;
-
-            }
-        }
-
-        countUniqueWords.push(count);
-    }
-
-    let baseWordsCount = {};
-
-    for (let i = 0; i < uniqueWords.length; i++) {
-
-        baseWordsCount[uniqueWords[i]] = countUniqueWords[i];    
-
-    }
-
-    return baseWordsCount;
+    return result;
     
 }
-
-//console.log(countWords("dffd ddd ghgh dfdsf ddds fddgf ddd ddds ghgh nn"));
-
 
 function getFibonacci(num) {
 
@@ -308,11 +217,15 @@ function getFibonacci(num) {
     let fibonacci = [];
 
     if (num < 1) {
+
         return fibonacci;
+
     }
 
     if (--num > 0) {
+
         fibonacci = getFibonacci(num);
+
     }
     
     if (num == 0) {
@@ -330,9 +243,8 @@ function getFibonacci(num) {
     }
     
     return fibonacci;
-}
 
-//console.log(getFibonacci(5));
+}
 
 function getFactorial(num) {
     
@@ -341,16 +253,18 @@ function getFactorial(num) {
     let factorial;
 
     if (num > 0) {
+
         factorial = getFactorial(--num);
+
     } else {
+
         factorial = 1;
+
     }
 
     return factorial * (++num);
 
 }
-
-//console.log(getFactorial(1));
 
 Array.prototype.sum = function (compare, index) {
 
@@ -396,8 +310,6 @@ Array.prototype.countElem = function(compare, index) {
 
 };
 
-//console.log(arr.countElem(a => a === 0));
-
 function getNumberBinarySys(num) {
 
     let numberDecimal = Number(num) || 0;
@@ -424,8 +336,10 @@ function getNumberDecimalSys(num, index) {
         index = index || 0;
         let result = 1;
 
-        if(pow == 0) {
+        if (pow == 0) {
+
             return result;
+
         }
 
         if (++index < pow) {
@@ -652,38 +566,94 @@ Array.prototype.avarageDoubleArr = function(compare, index) {
     return result["sum"] / result["counter"];
 };
 
-
-//console.log(arr.avarageDoubleArr(a => a % 2 === 0));
-//console.log(arr.avarageDoubleArr(a => Math.abs(a % 2) > 0));
-
-function getTransposeMatrix(matrix) {
+function getMatrix(matrix) {
 
     if (!Array.isArray(matrix)) {
         return [];
     }
+    
+    function bildRow (matrix, arr, indexI, index) {
+        
+        index = index || 0;
+        indexI = indexI || 0;
+        
+        let result = [];
 
+        if (index < matrix.length) {
+
+            result = bildRow(matrix, arr, indexI, ++index);
+            --index;
+            result.unshift(matrix[index][indexI]);
+
+        }
+
+        return result;
+
+    }
+    
     let changedMatrix = [];
 
     for (let i = 0; i < matrix[0].length; i++) {
 
-        changedMatrix.push([matrix[0][i]]);
-
-        for (let j = 1; j < matrix.length; j++) {
-
-            changedMatrix[i].push(matrix[j][i]);
-
-        }
-
-
+        //console.log(index)
+        changedMatrix.push( bildRow (matrix, changedMatrix, i) );
+        
     }
 
     return changedMatrix;
 }
 
-/*console.log(getTransposeMatrix([
+function getTransposeMatrix(matrix, index) {
+
+    if (!Array.isArray(matrix)) {
+        return [];
+    }
+    
+    function bildRow (matrix, arr, indexI, index) {
+        
+        index = index || 0;
+        indexI = indexI || 0;
+        
+        let result = [];
+
+        if (index < matrix.length) {
+
+            result = bildRow(matrix, arr, indexI, ++index);
+            --index;
+            result.unshift(matrix[index][indexI]);
+
+        }
+
+        return result;
+
+    }
+    
+    index = index || 0;
+
+    let changedMatrix = [];
+
+    
+
+    for (let i = 0; i < matrix[0].length; i++) {
+
+        changedMatrix.push( bildRow(matrix, changedMatrix, i) );
+        
+    }
+
+    return changedMatrix;
+}
+
+
+console.log(getMatrix([
     [1, 2, 3, 4],
     [5, 6, 7, 8],
-    [9, 10, 11, 12]]));*/
+    [9, 10, 11, 12]]));
+
+
+console.log(getTransposeMatrix([
+    [1, 2, 3, 4],
+    [5, 6, 7, 8],
+    [9, 10, 11, 12]]));
 
 
 function sumTwoMatrixs(matrix1, matrix2) {
