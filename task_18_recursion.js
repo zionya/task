@@ -116,12 +116,12 @@ function count(num) {
     
 }
 
-function countNumber(num) {
+function countNumber(num, index) {
 
-    //let numberArr = num.toString().split("");
+    index = index || 0;
     let numberArr = getSeparateNumber(num);
     let countNumbersArr = [];
-    
+    let result = [];
 
     function getSeparateNumber(num) {
 
@@ -142,44 +142,38 @@ function countNumber(num) {
 
         index = index || 0;
         indexI = indexI || 0;
-
+        
         let count = 0;
 
-        if (++index < arr.length) {
+        if (++index <= arr.length) {
 
             count = getCount(arr, indexI, index);
-
-        }
-
-        if (arr[indexI] === arr[index]) {
-
-            count++;
-
-        }
-        
-        return count;
-
-    }
-
-    for (let i = 0; i < numberArr.length; i++) {
-
-        count = getCount(numberArr, i)
-        console.log(numberArr[i], count)
-        /*let count = 0;
-
-        for (let j = 0; j < numberArr.length; j++) {
-
-            if (numberArr[i] === numberArr[j]) {
+           
+            if (arr[indexI] === arr[--index]) {
 
                 count++;
 
             }
-
-        }*/
-
-        countNumbersArr.push(count);
+            console.log( arr[indexI], arr[--index], count)
+        }
+       
+        return count;
 
     }
+    if (++index < numberArr.length) {
+
+        countNumbersArr = countNumber(num, index);
+        
+    }
+    //console.log(countNumbersArr)
+    countNumbersArr.push( getCount(numberArr, index) );
+
+    if (index > 1) {
+        return countNumbersArr;
+    }
+
+    console.log("len", numberArr)
+    console.log("len", countNumbersArr)
 
     let countedNumbers = {};
 
