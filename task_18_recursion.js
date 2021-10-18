@@ -143,9 +143,9 @@ function countUnigueWords(str, index) {
 
         let result = true;
 
-        if (++index <= arr.length) {
+        if (index < arr.length) {
 
-            result = isUnigueWord(arr, indexI, index);
+            result = isUnigueWord(arr, indexI, ++index);
             --index;
             if (arr[indexI] === arr[index]) {
 
@@ -166,7 +166,7 @@ function countUnigueWords(str, index) {
 
         count = countUnigueWords(str, ++index);
 
-        if ( isUnigueWord(wordsArr, index) ) {
+        if ( isUnigueWord(wordsArr, --index) ) {
 
             count++;
 
@@ -455,7 +455,7 @@ function sumMinMax(min, max, compare) {
         
         --min;
 
-        if( compare(min) ) {
+        if ( compare(min) ) {
             sum += min;
         }
 
@@ -566,43 +566,6 @@ Array.prototype.avarageDoubleArr = function(compare, index) {
     return result["sum"] / result["counter"];
 };
 
-function getMatrix(matrix) {
-
-    if (!Array.isArray(matrix)) {
-        return [];
-    }
-    
-    function bildRow (matrix, arr, indexI, index) {
-        
-        index = index || 0;
-        indexI = indexI || 0;
-        
-        let result = [];
-
-        if (index < matrix.length) {
-
-            result = bildRow(matrix, arr, indexI, ++index);
-            --index;
-            result.unshift(matrix[index][indexI]);
-
-        }
-
-        return result;
-
-    }
-    
-    let changedMatrix = [];
-
-    for (let i = 0; i < matrix[0].length; i++) {
-
-        //console.log(index)
-        changedMatrix.push( bildRow (matrix, changedMatrix, i) );
-        
-    }
-
-    return changedMatrix;
-}
-
 function getTransposeMatrix(matrix, index) {
 
     if (!Array.isArray(matrix)) {
@@ -629,51 +592,50 @@ function getTransposeMatrix(matrix, index) {
     }
     
     index = index || 0;
-
     let changedMatrix = [];
 
-    
+    if (index < matrix[0].length) {
 
-    for (let i = 0; i < matrix[0].length; i++) {
-
-        changedMatrix.push( bildRow(matrix, changedMatrix, i) );
-        
+        changedMatrix = getTransposeMatrix(matrix, ++index);
+        changedMatrix.push( bildRow(matrix, changedMatrix, (matrix[0].length - index)) );
     }
 
     return changedMatrix;
 }
 
-
-console.log(getMatrix([
-    [1, 2, 3, 4],
-    [5, 6, 7, 8],
-    [9, 10, 11, 12]]));
-
-
-console.log(getTransposeMatrix([
-    [1, 2, 3, 4],
-    [5, 6, 7, 8],
-    [9, 10, 11, 12]]));
-
-
-function sumTwoMatrixs(matrix1, matrix2) {
+function sumTwoMatrixs(matrix1, matrix2, index) {
 
     if (!Array.isArray(matrix1) || !Array.isArray(matrix2)) {
         return [];
     }
 
-    let sumMatrix = [];
+    function sumRow(matrix1, matrix2, indexI, index) {
 
-    for (let i = 0; i < matrix1.length; i++) {
+        index = index || 0;
 
-        sumMatrix.push([]);
+        let result = [];
 
-        for (let j = 0; j < matrix1[0].length; j++) {
+        if (index < matrix1[indexI].length) {
 
-            sumMatrix[i].push(matrix1[i][j] + matrix2[i][j]);
+            result = sumRow(matrix1, matrix2, indexI, ++index);
+            --index;
+
+            result.unshift( matrix1[indexI][index] + matrix2[indexI][index] );
 
         }
 
+        return result;
+
+    }
+
+    index = index || 0;
+    let sumMatrix = [];
+
+    if (index < matrix1.length) {
+
+        sumMatrix = sumTwoMatrixs(matrix1, matrix2, ++index);
+        --index;
+        sumMatrix.unshift( sumRow(matrix1, matrix2, index) );
 
     }
 
@@ -681,74 +643,102 @@ function sumTwoMatrixs(matrix1, matrix2) {
 
 }
 
-/*console.log( sumTwoMatrixs ([
-    [1, 2, 6],
-    [1, 2, 6],
-    [1, 2, 6]],
-    [
-        [3, 4, 6],
-        [3, 4, 6],
-        [3, 4, 6]]));*/
+Array.prototype.removeRow = function(compare, index) {
 
-Array.prototype.removeRow = function(compare) {
+    function isZero(compare, arr, index) {
 
-    function isZero(arr) {
+        index = index || 0;
+        let result = false;
+        
+        if (index < arr.length) {
 
-        for (let i = 0; i < arr.length; i++) {
-            if ( compare(arr[i]) ) {
-                return true;
+            result = isZero(compare, arr, ++index);
+            --index;
+
+            if ( compare(arr[index]) ) {
+
+                result = true;
+
             }
+
         }
 
-        return false;
+        return result;
 
     }
 
+    index = index || 0;
     let changedArray = this;
     
-    for (let i = 0; i < changedArray.length; i++) {
+    if (index < changedArray.length) {
 
-        if ( isZero(changedArray[i]) ) {
-            changedArray.splice(i, 1);
-            i--;
+        changedArray = this.removeRow(compare, ++index);
+
+        if ( isZero(compare, changedArray[--index]) ) {
+
+            changedArray.splice(index, 1);
+           
         }
     }
 
     return changedArray;
 };
 
+Array.prototype.removeСolumn = function(compare, index) {
 
-Array.prototype.removeСolumn = function(compare) {
+    function isZero(compare, arr, indexI, index) {
+        
+        index = index || 0;
+        let result = false;
 
-    function isZero(arr, index) {
+        if (index < arr.length) {
 
-        for (let i = 0; i < arr.length; i++) {
-            if ( compare(arr[i][index]) ) {
-                return true;
+            result = isZero(compare, arr, indexI, ++index);
+
+            if ( compare(arr[--index][indexI]) ) {
+
+                result = true;
+
             }
+
         }
 
-        return false;
+        return result;
 
     }
 
+    function remove(arr, indexI, index) {
+
+        index = index || 0;
+        let result = arr;
+
+        if (index < result.length) {
+
+            result = remove(result, indexI, ++index);
+            --index;
+            result[index].splice(indexI, 1);
+
+        }
+
+        return result;
+
+    }
+
+    index = index || 0;
     let changedArray = this;
-    
-    for (let i = 0; i < changedArray.length; i++) {
 
-        if ( isZero(changedArray, i) ) {
+    if (index < changedArray.length) {
 
-            for (let j = 0; j < changedArray.length; j++) {
-                changedArray[j].splice(i, 1);
-            }
+        changedArray = this.removeСolumn(compare, ++index);
+        --index;
 
-            i--;
+        if ( isZero(compare, changedArray, index) ) {
+
+            changedArray = remove(changedArray, index);
+
         }
     }
-
+    
     return changedArray;
 
 };
-
-//console.log(array.removeRow(a => a === 0))
-//console.log(array.removeСolumn(a => a === 0))
