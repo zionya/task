@@ -206,33 +206,55 @@ function getFibonacci(num) {
 //console.log(getFibonacci(3));
 
 function Rectangle(width, height) {
-    this.width = width || 0;
-    this.height = height || 0;
+
+    this.width = width;
+    this.height = height;
+
 }
 
 Rectangle.prototype.perimeter = function() {
+
+
+    if (this.width === 0 || this.height === 0) {
+        throw new Error("Side is zero!")
+    }
     return 2 * (this.height + this.width);
+
 };
 Rectangle.prototype.square = function() {
+    
+    if (this.width === 0 || this.height === 0) {
+        throw new Error("Side is zero!")
+    }
+    
     return this.height * this.width;
+
 };
 
-//let rect = new Rectangle(5, 10);
+//let rect = new Rectangle(5, 0);
 //console.log(rect.perimeter());
 //console.log(rect.square());
 
 function Triangle(side1, side2, side3) {
-    this.side1 = side1 || 0;
-    this.side2 = side2 || 0;
-    this.side3 = side3 || 0;
+    this.side1 = side1;
+    this.side2 = side2;
+    this.side3 = side3;
 }
 
 Triangle.prototype.perimeter = function() {
+    
+    if (this.side1 === 0 || this.side2 === 0 || this.side3 === 0) {
+        throw new Error("Side is zero!")
+    }
     return this.side1 + this.side2 + this.side3;
 };
 
 Triangle.prototype.square = function() {
     
+
+    if (this.side1 === 0 || this.side2 === 0 || this.side3 === 0) {
+        throw new Error("Side is zero!")
+    }
     let semiPerimeter = (this.side1 + this.side2 + this.side3) / 2;
     
     return Math.sqrt(semiPerimeter * (semiPerimeter - this.side1) * (semiPerimeter - this.side2) * (semiPerimeter - this.side3));
@@ -247,10 +269,19 @@ function Circle(radius) {
 }
 
 Circle.prototype.length = function() {
+
+
+    if (this.radius === 0) {
+        throw new Error("Radius is zero!")
+    }
     return 2 * Math.PI * this.radius;
 };
 
 Circle.prototype.square = function() {
+
+    if (this.radius === 0) {
+        throw new Error("Radius is zero!")
+    }
     return Math.PI * this.radius * this.radius;
 };
 

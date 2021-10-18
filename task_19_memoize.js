@@ -4,6 +4,7 @@ function isAnogramma() {
     let memo = {};
 
     return function anogramma(firstWord, secondWord, index) {
+        
         index = index || 0;
 
         let firstWordLower = firstWord.toLowerCase();
@@ -53,7 +54,7 @@ function isAnogramma() {
 
         let result = memo[(firstWord+secondWord)];
 
-        if(result === undefined){
+        if (result === undefined) {
 
             if (++index <= firstWordLower.length) {
 
@@ -193,7 +194,7 @@ function countUnigueWords() {
         let count = 0;
         let result = memo[str];
 
-        if(result === undefined){
+        if (result === undefined) {
 
             if (index < wordsArr.length) {
 
@@ -265,7 +266,7 @@ function countWords() {
 function fibonacci() {
     let memo = {};
 
-    return function getFibonacci(num){
+    return function getFibonacci(num) {
         
         num = num || 0;
 
@@ -313,7 +314,7 @@ function factorial() {
 
     let memo = {};
 
-    return function getFactorial(num){
+    return function getFactorial(num) {
 
          if (num == 1) {
              return 1;
@@ -333,501 +334,656 @@ function factorial() {
     }
 }
 
+function sumArray() {
 
-/*function factorial() {
     let memo = {};
 
-    return function fact(num){
-         if(num == 1){
-             return 1;
-         }
+    return function sum(arr, compare, index) {
 
-         let result = memo[num];
-         if(result === undefined){
-             result = fact(num - 1);
-             memo[num] = result;
-             console.log(memo[num]);
-         }
+        if (arr.length === 0) {
 
-         return num * result;
-    }
-}
-let fact = factorial();
-console.log(fact(7));
-console.log(fact(10));*/
-Array.prototype.sum = function (compare, index) {
+            return null;
 
-    index = index || 0;
-    let result = 0;
-
-    if (index < this.length) {
-    
-        result = this.sum(compare, ++index);
-        --index;      
-
-    }
-    
-    if (compare(this[index])) {
-        
-        result += this[index];
-
-    }
-
-    return result;
-
-};
-
-Array.prototype.countElem = function(compare, index) {
-    
-    index = index || 0;
-    let counter = 0;
-
-    if (index < this.length) {
-    
-        counter = this.countElem(compare, ++index);
-        --index;      
-
-    }
-    
-    if (compare(this[index])) {
-        
-        counter++;
-
-    }
-
-    return counter;
-
-};
-
-function getNumberBinarySys(num) {
-
-    let numberDecimal = Number(num) || 0;
-    let binary = [];
-    
-    if (numberDecimal > 1) {
-    
-        binary = getNumberBinarySys( Math.floor(numberDecimal / 2));
-
-    }
-        
-    binary.push(numberDecimal % 2);
-
-    return binary;
-}
-
-function getNumberDecimalSys(num, index) {
-
-    num = num || 0;
-    index = index || 0;
-
-    function myPow(num, pow, index) {
+        }
 
         index = index || 0;
-        let result = 1;
 
-        if (pow == 0) {
+        let key = arr.toString() + compare.toString();
 
+        let result = memo[key] || 0;
+
+        if (memo[key] === undefined) {
+
+            if (index < arr.length) {
+
+                result = sum(arr, compare, ++index);
+                --index;
+
+                if (compare(arr[index])) {
+
+                    result += arr[index];
+
+                }
+
+                memo[key] = result;
+                
+            }
+
+        }
+
+        return result;
+
+    }
+
+}
+
+function countElem() {
+    let memo = {};
+
+    return function count(arr, compare, index) {
+        
+        if (arr.length === 0) {
+
+            return null;
+
+        }
+
+        index = index || 0;
+
+        let key = arr.toString() + compare.toString();
+
+        let result = memo[key] || 0;
+
+        if (memo[key] === undefined) {
+
+            
+            if (index < arr.length) {
+            
+                result = count(arr, compare, ++index);
+                --index;      
+
+            }
+            
+            if (compare(arr[index])) {
+                
+                result++;
+
+            }
+
+            memo[key] = result;
+
+        }
+
+        return result;
+    }
+}
+
+function getNumberBinarySys() {
+
+    let memo = {};
+
+    return function binarySys(num) {
+        
+        let numberDecimal = Number(num) || 0;
+        let binary = memo[num] || [];
+
+        if (memo[num] === undefined) {
+
+            if (numberDecimal > 1) {
+    
+                binary = binarySys( Math.floor(numberDecimal / 2));
+        
+            }
+            
+            binary.push(numberDecimal % 2);
+            memo[num] = binary;
+        }
+
+        return binary;
+    }
+}
+
+function getNumberDecimalSys() {
+    let memo = {};
+
+    return function decimalSys(num, index) {
+        
+        num = num || 0;
+        index = index || 0;
+
+        function myPow(num, pow, index) {
+
+            index = index || 0;
+            let result = 1;
+    
+            if (pow == 0) {
+    
+                return result;
+    
+            }
+    
+            if (++index < pow) {
+                
+                result = myPow(num, pow, index);
+                --index;
+    
+            }
+            
+            result *= num;
+    
             return result;
-
         }
 
-        if (++index < pow) {
-            
-            result = myPow(num, pow, index);
-            --index;
+        let binary = num.toString();
+        let decimal = memo[num] || 0;
 
-        }
+        if (memo[num] === undefined) {
+
+            if (index < binary.length) {
+
+                decimal = decimalSys(num, ++index);
+                --index;
         
-        result *= num;
+            }
+            if (binary[index] > 0) {
+        
+                decimal += myPow(2, (binary.length - index - 1));
+        
+            }
+        
+            memo[num] = decimal;
+            
+        }
+
+        return decimal;
+    }
+
+
+}
+
+function sumDoubleArr() {
+    let memo = {};
+
+    return function sum(arr, compare, indexI, indexJ) {
+
+        indexI = indexI || 0;
+        indexJ = indexJ || 0;
+
+        let key = arr.toString() + compare.toString();
+        
+        let result = memo[key] || 0;
+
+        if (memo[key] === undefined) {
+            
+            if (indexI < arr.length) {
+                
+                if (indexJ < arr[indexI].length) {
+                    
+                    result = sum(arr, compare, indexI, ++indexJ);
+                    --indexJ;
+                
+                    if ( compare(arr[indexI][indexJ]) ) {
+        
+                        result += arr[indexI][indexJ];
+        
+                    }
+                    
+                    memo[key] = result;
+                    return result;
+                
+                }
+        
+                indexJ = 0;
+        
+                result = sum(arr, compare, ++indexI, indexJ);
+                  
+            }
+            
+        }
 
         return result;
     }
-
-
-    let decimal = 0; 
-    let binary = num.toString();
-
-    if (index < binary.length) {
-
-        decimal = getNumberDecimalSys(num, ++index);
-        --index;
-
-    }
-    if (binary[index] > 0) {
-
-        decimal += myPow(2, (binary.length - index - 1));
-
-    }
-
-    return decimal;
-  
 }
 
-Array.prototype.sumDoubleArr = function(compare, indexI, indexJ) {
-
-    indexI = indexI || 0;
-    indexJ = indexJ || 0;
-
-    let sum = 0;
-
-    if (indexI < this.length) {
-                
-        if (indexJ < this[indexI].length) {
-            
-            sum = this.sumDoubleArr(compare, indexI, ++indexJ);
-            --indexJ;
-        
-            if ( compare(this[indexI][indexJ]) ) {
-
-                sum += this[indexI][indexJ];
-
-            }
-
-            return sum;
-        
-        }
-
-        indexJ = 0;
-
-        sum = this.sumDoubleArr(compare, ++indexI, indexJ);
-        
-    }
+function countElemDoubleArr() {
     
-    return sum;
+    let memo = {};
 
-};
+    return function count(arr, compare, indexI, indexJ) {
+        
+        indexI = indexI || 0;
+        indexJ = indexJ || 0;
 
-Array.prototype.countElemDoubleArr = function(compare, indexI, indexJ) {
-    
-    indexI = indexI || 0;
-    indexJ = indexJ || 0;
+        
+        let key = arr.toString() + compare.toString();
+        
+        let counter = memo[key] || 0;
+        
+        if (memo[key] === undefined) {
 
-    let counter = 0;
-
-    if (indexI < this.length) {
+            if (indexI < arr.length) {
                 
-        if (indexJ < this[indexI].length) {
-            
-            counter = this.countElemDoubleArr(compare, indexI, ++indexJ);
-            --indexJ;
+                if (indexJ < arr[indexI].length) {
+                    
+                    counter = count(arr, compare, indexI, ++indexJ);
+                    --indexJ;
+        
+                    if ( compare(arr[indexI][indexJ]) ) {
+        
+                        counter++;
+        
+                    }
 
-            if ( compare(this[indexI][indexJ]) ) {
-
-                counter++;
-
+                    memo[key] = counter;
+                    return counter;
+                
+                }
+        
+                indexJ = 0;
+        
+                counter = count(arr, compare, ++indexI, indexJ);
+                
             }
             
-            return counter;
-        
+            console.log("memo", memo[key]);
         }
 
-        indexJ = 0;
-
-        counter = this.countElemDoubleArr(compare, ++indexI, indexJ);
-        
+        return counter;
     }
-    
-    return counter;
 }
 
+function sumMinMax() {
+    let memo = {};
 
-function sumMinMax(min, max, compare) {
+    return function sum(min, max, compare) {
 
-    min = min || 0;
-    max = max || 0;
-    
-    let sum = 0;
+        min = min || 0;
+        max = max || 0;
 
-    if (min <= max) {
+        let key = min.toString() + max;
+        let result = memo[key] || 0;
 
-        sum = sumMinMax (++min, max, compare);
+        if (memo[key] === undefined) {
+
+            if (min <= max) {
+
+                result = sum (++min, max, compare);
+                
+                --min;
         
-        --min;
-
-        if ( compare(min) ) {
-            sum += min;
+                if ( compare(min) ) {
+                    result += min;
+                }
+        
+            }
+            
+            memo[key] = result;
+            console.log("MM", memo[key]);
         }
-
-    }
-
-    return sum;
-}
-
-Array.prototype.avarage = function(compare, index) {
-
-    index = index || 0;
-
-    let result = {
-        "counter": 0,
-        "sum": 0,
-    };
-
-    //
-    if (index < this.length) {
-    
-        result = this.avarage(compare, ++index);
-        
-        --index;   
-        
-        if (compare(this[index])) {
-        
-            result["counter"] += 1;
-            result["sum"] += this[index];;
-    
-        }
-
-    }
-        
-    if (index > 0) {
 
         return result;
-
-    } 
-
-    if (result["counter"] === 0) {
-
-        return 0;
-
     }
+}
 
-    return result["sum"] / result["counter"];
+function avarage() {
 
-};
+    let memo = {};
 
-Array.prototype.avarageDoubleArr = function(compare, index) {
+    return function avarageArr(arr, compare, index) {
 
-    index = index || 0;
-
- 
-    let result = {
-        "counter": 0,
-        "sum": 0,
-    };
-    
-    function sumElem(compare, arr, index) {
-        
         index = index || 0;
 
+        let key = arr.toString() + compare.toString();
+        let result = memo[key] || {"counter": 0, "sum": 0,};
+
+        if (memo[key] === undefined) {
+            
+            if (index < arr.length) {
+    
+                result = avarageArr(arr, compare, ++index);
+                
+                --index;   
+                
+                if (compare(arr[index])) {
+                
+                    result["counter"] += 1;
+                    result["sum"] += arr[index];;
+            
+                }
+        
+            }
+                
+            if (index > 0) {
+        
+                return result;
+        
+            } 
+        
+            if (result["counter"] === 0) {
+        
+                return 0;
+        
+            }
+        
+            memo[key] = result["sum"] / result["counter"];
+        }
+
+        return memo[key];
+    }
+}
+
+function avarageDoubleArr() {
+    let memo = {};
+
+    return function avarage(arr, compare, index) {
+        
+        function sumElem(compare, arr, index) {
+        
+            index = index || 0;
+    
+            let result = {
+                "counter": 0,
+                "sum": 0,
+            };
+    
+            if (++index <= arr.length) {
+    
+                 result = sumElem(compare, arr, index);
+                 --index;
+    
+                if (compare(arr[index])) {
+                    
+                    result["counter"]++;
+                    result["sum"] += arr[index]; 
+    
+                }
+            }
+            
+            return result;
+    
+        }
+        
+        index = index || 0;
+        
+        let key = arr.toString() + compare.toString();
+        
         let result = {
             "counter": 0,
             "sum": 0,
         };
 
-        if (++index <= arr.length) {
+        if (memo[key] === undefined) {
 
-             result = sumElem(compare, arr, index);
-             --index;
+            if (index < arr.length) {
 
-            if (compare(arr[index])) {
-                
-                result["counter"]++;
-                result["sum"] += arr[index]; 
-
+                result = avarage(arr, compare, ++index)
+                --index;
+                let sum = sumElem(compare, arr[index]);
+                result["counter"] += sum["counter"];
+                result["sum"] += sum["sum"];
+        
             }
-        }
         
-        return result;
-
-    }
-
-    if (index < this.length) {
-
-        result = this.avarageDoubleArr(compare, ++index)
-        --index;
-        let sum = sumElem(compare, this[index]);
-        result["counter"] += sum["counter"];
-        result["sum"] += sum["sum"];
-
-    }
-
-    if (index > 0) {
-
-        return result;
-
-    }
-
-    if (result["counter"] === 0) {
-
-        return 0;
-
-    }
-
-    return result["sum"] / result["counter"];
-};
-
-function getTransposeMatrix(matrix, index) {
-
-    if (!Array.isArray(matrix)) {
-        return [];
-    }
-    
-    function bildRow (matrix, arr, indexI, index) {
+            if (index > 0) {
         
-        index = index || 0;
-        indexI = indexI || 0;
+                return result;
         
-        let result = [];
-
-        if (index < matrix.length) {
-
-            result = bildRow(matrix, arr, indexI, ++index);
-            --index;
-            result.unshift(matrix[index][indexI]);
-
+            }
+            
+            if (result["counter"] === 0) {
+        
+                return 0;
+        
+            }
+        
+            memo[key] = result["sum"] / result["counter"];
+            
         }
 
-        return result;
-
+        return memo[key];
     }
-    
-    index = index || 0;
-    let changedMatrix = [];
-
-    if (index < matrix[0].length) {
-
-        changedMatrix = getTransposeMatrix(matrix, ++index);
-        changedMatrix.push( bildRow(matrix, changedMatrix, (matrix[0].length - index)) );
-    }
-
-    return changedMatrix;
 }
 
-function sumTwoMatrixs(matrix1, matrix2, index) {
+function getTransposeMatrix() {
+    let memo = {};
 
-    if (!Array.isArray(matrix1) || !Array.isArray(matrix2)) {
-        return [];
-    }
-
-    function sumRow(matrix1, matrix2, indexI, index) {
+    return function transposeMatrix(matrix, index) {
+        
+        if (!Array.isArray(matrix)) {
+            return [];
+        }
+        
+        function bildRow (matrix, arr, indexI, index) {
+            
+            index = index || 0;
+            indexI = indexI || 0;
+            
+            let result = [];
+    
+            if (index < matrix.length) {
+    
+                result = bildRow(matrix, arr, indexI, ++index);
+                --index;
+                result.unshift(matrix[index][indexI]);
+    
+            }
+    
+            return result;
+    
+        }
 
         index = index || 0;
+        let key = matrix.toString();
 
-        let result = [];
+        let result = memo[key] || [];
 
-        if (index < matrix1[indexI].length) {
+        if (memo[key] === undefined) {
 
-            result = sumRow(matrix1, matrix2, indexI, ++index);
-            --index;
+            if (index < matrix[0].length) {
 
-            result.unshift( matrix1[indexI][index] + matrix2[indexI][index] );
+                result = transposeMatrix(matrix, ++index);
+                result.push( bildRow(matrix, result, (matrix[0].length - index)) );
 
+            }
+        
+            memo[key] = result;
+            
         }
 
         return result;
-
     }
-
-    index = index || 0;
-    let sumMatrix = [];
-
-    if (index < matrix1.length) {
-
-        sumMatrix = sumTwoMatrixs(matrix1, matrix2, ++index);
-        --index;
-        sumMatrix.unshift( sumRow(matrix1, matrix2, index) );
-
-    }
-
-    return sumMatrix;
-
 }
 
-Array.prototype.removeRow = function(compare, index) {
+function sumTwoMatrixs() {
+    let memo = {};
 
-    function isZero(compare, arr, index) {
+    return function sumMatrixs(matrix1, matrix2, index) {
+        
+        if (!Array.isArray(matrix1) || !Array.isArray(matrix2)) {
+            return [];
+        }
+    
+        function sumRow(matrix1, matrix2, indexI, index) {
+    
+            index = index || 0;
+    
+            let result = [];
+    
+            if (index < matrix1[indexI].length) {
+    
+                result = sumRow(matrix1, matrix2, indexI, ++index);
+                --index;
+    
+                result.unshift( matrix1[indexI][index] + matrix2[indexI][index] );
+    
+            }
+    
+            return result;
+    
+        }
 
         index = index || 0;
-        let result = false;
-        
-        if (index < arr.length) {
+        let key = matrix1.toString() + matrix2.toString();
+        let sumMatrix = memo[key] || [];
 
-            result = isZero(compare, arr, ++index);
-            --index;
+        if (memo[key] === undefined) {
+            
+                    
+            if (index < matrix1.length) {
 
-            if ( compare(arr[index]) ) {
-
-                result = true;
+                sumMatrix = sumMatrixs(matrix1, matrix2, ++index);
+                    
+                --index;
+                sumMatrix.unshift( sumRow(matrix1, matrix2, index) );
 
             }
 
+            memo[key] = sumMatrix;
+            
         }
 
-        return result;
-
+        return sumMatrix;
     }
+}
 
-    index = index || 0;
-    let changedArray = this;
-    
-    if (index < changedArray.length) {
+function removeRow() {
+    let memo = {};
 
-        changedArray = this.removeRow(compare, ++index);
-
-        if ( isZero(compare, changedArray[--index]) ) {
-
-            changedArray.splice(index, 1);
-           
-        }
-    }
-
-    return changedArray;
-};
-
-Array.prototype.removeСolumn = function(compare, index) {
-
-    function isZero(compare, arr, indexI, index) {
+    return function remove(matrix, compare, index) {
         
-        index = index || 0;
-        let result = false;
+        function isZero(compare, arr, index) {
 
-        if (index < arr.length) {
+            index = index || 0;
+            let result = false;
+            
+            if (index < arr.length) {
 
-            result = isZero(compare, arr, indexI, ++index);
+                result = isZero(compare, arr, ++index);
+                --index;
 
-            if ( compare(arr[--index][indexI]) ) {
+                if ( compare(arr[index]) ) {
 
-                result = true;
+                    result = true;
+
+                }
 
             }
 
+            return result;
+
         }
-
-        return result;
-
-    }
-
-    function remove(arr, indexI, index) {
 
         index = index || 0;
-        let result = arr;
+        let key = matrix.toString() + compare.toString();
+        let changedArray = memo[key] || matrix;
+        
+        if (memo[key] === undefined) {
+            
+            if (index < changedArray.length) {
 
-        if (index < result.length) {
+                changedArray = remove(matrix, compare, ++index);
+        
+                if ( isZero(compare, changedArray[--index]) ) {
+        
+                    changedArray.splice(index, 1);
+                   
+                }
+            }
+            memo[key] = changedArray;
+        }
 
-            result = remove(result, indexI, ++index);
-            --index;
-            result[index].splice(indexI, 1);
+        return changedArray;
+    }
+}
+
+
+
+
+/*function factorial() {
+    let memo = {};
+
+    return function fact(num) {
+        if (num == 1) {
+            return 1;
+        }
+
+        let result = memo[num];
+        if (result === undefined) {
+            result = fact(num - 1);
+            memo[num] = result;
+            console.log(memo[num]);
+        }
+
+        return num * result;
+    }
+}
+let fact = factorial();
+console.log(fact(7));
+console.log(fact(10));*/
+
+function removeСolumn() {
+    let memo = {};
+
+    return function removeCol(matrix, compare, index) {
+        
+        function isZero(compare, arr, indexI, index) {
+            
+            index = index || 0;
+            let result = false;
+
+            if (index < arr.length) {
+
+                result = isZero(compare, arr, indexI, ++index);
+
+                if ( compare(arr[--index][indexI]) ) {
+
+                    result = true;
+
+                }
+
+            }
+
+            return result;
 
         }
 
-        return result;
+        function remove(arr, indexI, index) {
 
-    }
+            index = index || 0;
+            let result = arr;
 
-    index = index || 0;
-    let changedArray = this;
+            if (index < result.length) {
 
-    if (index < changedArray.length) {
+                result = remove(result, indexI, ++index);
+                --index;
+                result[index].splice(indexI, 1);
 
-        changedArray = this.removeСolumn(compare, ++index);
-        --index;
+            }
 
-        if ( isZero(compare, changedArray, index) ) {
-
-            changedArray = remove(changedArray, index);
+            return result;
 
         }
-    }
-    
-    return changedArray;
 
-};
+        index = index || 0;
+        let key = matrix.toString() + compare.toString();
+        let changedArray = memo[key] || matrix;
+
+        if (memo[key] === undefined) {
+            
+            if (index < changedArray.length) {
+
+                changedArray = removeCol(matrix, compare, ++index);
+                --index;
+        
+                if ( isZero(compare, changedArray, index) ) {
+        
+                    changedArray = remove(changedArray, index);
+        
+                }
+            }
+            memo[key] = changedArray;
+        }
+
+        return changedArray;
+    }
+}
