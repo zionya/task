@@ -10,97 +10,68 @@ function isAnogramma(firstWord, secondWord) {
     let secondWordLower = secondWord.toLowerCase();
 
     if (firstWordLower.length !== secondWordLower.length) {
-        
         return false;
-
     }
 
     for (let i = 0; i < firstWordLower.length; i++) {
-
         let countI = 0;
         let countJ = 0;
 
         for (let j = 0; j < firstWordLower.length; j++) {
-
             if (firstWordLower[i] === firstWordLower[j]) {
                 countI++;
             }
-
             if (firstWordLower[i] === secondWordLower[j]) {
                 countJ++;
             }
-
         }
 
         if (countI !== countJ) {
-            
             return false;
-
         } 
-
     }
-
     return true;
-
 }
-
-
 //console.log(isAnogramma("asDsG", "gdass"));
 
-
 function countNumber(num) {
-
     num = num || 0;
-
     let numberArr = getSeparateNumber(num);
     let countNumbersArr = [];
     
     function getSeparateNumber(num) {
-
         let result = [];
         let numberSeparate = num;
 
         while (numberSeparate > 0) {
-
             result.unshift(numberSeparate % 10);
             numberSeparate = Math.floor (numberSeparate / 10);
-
         }
 
         return result;
-
     }
 
     for (let i = 0; i < numberArr.length; i++) {
-
         let count = 0;
 
         for (let j = 0; j < numberArr.length; j++) {
 
             if (numberArr[i] === numberArr[j]) {
-
                 count++;
-
             }
 
         }
-
         countNumbersArr.push(count);
-
     }
 
     let countedNumbers = {};
 
     for (let i = 0; i < numberArr.length; i++) {
-
         countedNumbers[numberArr[i]] = countNumbersArr[i];
-
     }
     
     return countedNumbers;
-    
 }
-
 //console.log(countNumber(123559990));
 
 function countUnigueWords(str) {
@@ -118,7 +89,6 @@ function countUnigueWords(str) {
                 if (index !== i) {
                     return false;
                 }
-
             }
         }
         return true;
@@ -134,10 +104,8 @@ function countUnigueWords(str) {
         }
                 
     }
-
     return count;
 }
-
 //console.log(countUnigueWords("dffd ddd ghgh dfdsf nn ddds fddgf ddd nn ddds ghgh"));
 
 function countWords(str) {
@@ -152,21 +120,14 @@ function countWords(str) {
     for (let i = 0; i < wordsArr.length; i++) {
 
         if ( result[wordsArr[i]] === undefined ) {
-
             result[wordsArr[i]] = 1;
-
         } else {
-
             result[wordsArr[i]]++;
-
         }
 
     }
-    
     return result;
-    
 }
-
 //console.log(countWords("dffd ddd ghgh dfdsf ddds fddgf ddd ddds ghgh nn"));
 
 function getFibonacci(num) {
@@ -192,43 +153,37 @@ function getFibonacci(num) {
     fibonacci.push(second);
 
     for (let i = 2; i < num; i++) {
-
         let nextNumber = first + second;
         fibonacci.push(nextNumber);
         first = second;
         second = nextNumber;
-
     }
 
     return fibonacci;
-
 }
 //console.log(getFibonacci(3));
 
 function Rectangle(width, height) {
-
     this.width = width;
     this.height = height;
-
 }
 
 Rectangle.prototype.perimeter = function() {
 
-
     if (this.width === 0 || this.height === 0) {
         throw new Error("Side is zero!")
     }
-    return 2 * (this.height + this.width);
 
+    return 2 * (this.height + this.width);
 };
+
 Rectangle.prototype.square = function() {
     
     if (this.width === 0 || this.height === 0) {
         throw new Error("Side is zero!")
     }
-    
-    return this.height * this.width;
 
+    return this.height * this.width;
 };
 
 //let rect = new Rectangle(5, 0);
@@ -246,15 +201,16 @@ Triangle.prototype.perimeter = function() {
     if (this.side1 === 0 || this.side2 === 0 || this.side3 === 0) {
         throw new Error("Side is zero!")
     }
+
     return this.side1 + this.side2 + this.side3;
 };
 
 Triangle.prototype.square = function() {
-    
 
     if (this.side1 === 0 || this.side2 === 0 || this.side3 === 0) {
         throw new Error("Side is zero!")
     }
+
     let semiPerimeter = (this.side1 + this.side2 + this.side3) / 2;
     
     return Math.sqrt(semiPerimeter * (semiPerimeter - this.side1) * (semiPerimeter - this.side2) * (semiPerimeter - this.side3));
@@ -270,10 +226,10 @@ function Circle(radius) {
 
 Circle.prototype.length = function() {
 
-
     if (this.radius === 0) {
         throw new Error("Radius is zero!")
     }
+
     return 2 * Math.PI * this.radius;
 };
 
@@ -282,6 +238,7 @@ Circle.prototype.square = function() {
     if (this.radius === 0) {
         throw new Error("Radius is zero!")
     }
+
     return Math.PI * this.radius * this.radius;
 };
 
@@ -298,23 +255,18 @@ function getFactorial(num) {
     let factorial = 1;
 
     for (let i = 0; i < num; i++) {
-
         factorial = factorial * (i + 1);
-
     }
 
     return factorial;
-
 }
 
 //console.log(getFactorial(5));
 
 Array.prototype.sum = function(compare) {
-
     let sum = 0;
 
     for (let i = 0; i < this.length; i++) {
-
         if ( compare(this[i]) ) {
             sum += this[i];
         }
@@ -324,23 +276,18 @@ Array.prototype.sum = function(compare) {
 };
 
 Array.prototype.countElem = function(compare) {
-    
     let counter = 0;
 
     for (let i = 0; i < this.length; i++) {
-
         if ( compare(this[i]) ) {
             counter++;
         } 
-
     }
 
     return counter;
-
 };
 
 //let arr = [2, 11, 0, 7, 8, 9, 10, 12, 20, 21];
-
 //console.log(arr.sum(a => a % 2 === 0));
 //console.log(arr.sum(a => a % 3 === 0));
 //console.log(arr.sum(a => a > 0));
@@ -358,11 +305,9 @@ Array.prototype.countElem = function(compare) {
     }
 
     for (let i = 1; i < a; i++) {
-
         if (a % i === 0) {
             counter++;
         }
-
     }
 
     if (counter > 1) {
@@ -370,24 +315,19 @@ Array.prototype.countElem = function(compare) {
     } 
 
     return true;
-
 }));*/
 
 function getNumberBinarySys(num) {
-
     let numberDecimal = Number(num) || 0;
     let binary = [];
 
     while (numberDecimal > 0) {
-
         binary.unshift(numberDecimal % 2);
         numberDecimal = Math.floor(numberDecimal / 2);
-
     }
 
     return Number(binary.join(""));
 }
-
 //console.log(getNumberBinarySys(15));
 
 function getNumberDecimalSys(num) {
@@ -397,18 +337,14 @@ function getNumberDecimalSys(num) {
     }
 
     function pow(num, pow) {
-
         let result = 1;
 
         for (let i = 0; i < pow; i++) {
-
             result *= num;
-
         }
 
         return result;
     }
-
 
     let decimal = 0; 
     let binary = num.toString();
@@ -421,52 +357,40 @@ function getNumberDecimalSys(num) {
     }
 
     return decimal;
-  
 }
 
 //console.log(getNumberDecimalSys("1111"));
 
 Array.prototype.sumDoubleArr = function(compare) {
-
     let sum = 0;
 
     for (let i = 0; i < this.length; i++) {
 
         for (let j = 0; j < this[i].length; j++) {
-
             if ( compare(this[i][j]) ) {
                 sum += arr[i][j];
             }
-
         }
-
     }
 
     return sum;
-
 };
 
 Array.prototype.countElemDoubleArr = function(compare) {
-
     let counter = 0;
 
     for (let i = 0; i < this.length; i++) {
 
         for (let j = 0; j < this[i].length; j++) {
-
             if ( compare(this[i][j]) ) {
                 counter++;
             }
-
         } 
 
     }
 
     return counter;
-
 }
-
-
 //let arr = [[-2, 4], [-6, 7], [8, -9], [10, 12], [20, 21]];
 
 //console.log(arr.sumDoubleArr(a => a % 2 === 0))
@@ -475,37 +399,31 @@ Array.prototype.countElemDoubleArr = function(compare) {
 //console.log(arr.sumDoubleArr(a => Math.abs(a % 2) > 0))
 
 //let arr = [[2, 4], [0, -7], [8, 0], [-10, 0], [20, 21]];
-
 //console.log(arr.countElemDoubleArr(a => a === 0));
 //console.log(arr.countElemDoubleArr(a => a < 0));
 //console.log(arr.countElemDoubleArr(a => a > 0));
 
 function sumMinMax(min, max, compare) {
-
     min = min || 0;
     max = max || 0;
-    
     let sum = 0;
 
     for (let i = min; i <= max; i++) {
-
         if ( compare(i) ) {
             sum += i;
         }
-
     }
+
     return sum;
 }
 
 //console.log(sumMinMax(1, 5, a => true));
 //console.log(sumMinMax(1, 9, a => a % 3 === 0));
 //console.log(sumMinMax(-5, 5, a => a > 0));
-
 //let arr = [1, 2, 3, 4, 5, 6, 7];
-let arr = [[1, 2], [3, 4], [5, 6], [7, 5]];
+//let arr = [[1, 2], [3, 4], [5, 6], [7, 5]];
 
 Array.prototype.avarage = function(compare) {
-
     let counter = 0;
     let sum = 0;
 
@@ -519,17 +437,13 @@ Array.prototype.avarage = function(compare) {
     }
 
     if (counter === 0) {
-
         return 0;
-
     }
 
     return sum / counter;
-
 };
 
 Array.prototype.avarageDoubleArr = function(compare) {
-
     let counter = 0;
     let sum = 0;
 
@@ -542,19 +456,14 @@ Array.prototype.avarageDoubleArr = function(compare) {
                 sum += this[i][j];
             }    
         }
-
     }
 
     if (counter === 0) {
-
         return 0;
-
     }
 
     return sum / counter;
-
 };
-
 //console.log(arr.avarage(a => true));
 //console.log(arr.avarage(a => a % 2 === 0));
 //console.log(arr.avarage(a => Math.abs(a % 2) > 0));
@@ -573,21 +482,15 @@ function getTransposeMatrix(matrix) {
     let changedMatrix = [];
 
     for (let i = 0; i < matrix[0].length; i++) {
-
         changedMatrix.push([matrix[0][i]]);
 
         for (let j = 1; j < matrix.length; j++) {
-
             changedMatrix[i].push(matrix[j][i]);
-
         }
-
-
     }
 
     return changedMatrix;
 }
-
 /*console.log(getTransposeMatrix([
     [1, 2, 3, 4],
     [5, 6, 7, 8],
@@ -603,20 +506,15 @@ function sumTwoMatrixs(matrix1, matrix2) {
     let sumMatrix = [];
 
     for (let i = 0; i < matrix1.length; i++) {
-
         sumMatrix.push([]);
 
         for (let j = 0; j < matrix1[0].length; j++) {
-
             sumMatrix[i].push(matrix1[i][j] + matrix2[i][j]);
-
         }
-
 
     }
 
     return sumMatrix;
-
 }
 
 /*console.log( sumTwoMatrixs ([
@@ -639,7 +537,6 @@ Array.prototype.removeRow = function(compare) {
         }
 
         return false;
-
     }
 
     let changedArray = this;
@@ -661,13 +558,13 @@ Array.prototype.removeСolumn = function(compare) {
     function isZero(arr, index) {
 
         for (let i = 0; i < arr.length; i++) {
+            
             if ( compare(arr[i][index]) ) {
                 return true;
             }
         }
-
+        
         return false;
-
     }
 
     let changedArray = this;
@@ -679,14 +576,11 @@ Array.prototype.removeСolumn = function(compare) {
             for (let j = 0; j < changedArray.length; j++) {
                 changedArray[j].splice(i, 1);
             }
-
             i--;
         }
     }
 
     return changedArray;
-
 };
-
 //console.log(array.removeRow(a => a === 0))
 //console.log(array.removeСolumn(a => a === 0))
